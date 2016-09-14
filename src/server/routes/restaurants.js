@@ -7,15 +7,14 @@ router.get('/', function (req, res, next) {
 
 });
 
+router.get('/new', function (req, res, next) {
+  const renderObj = {};
+  res.render('newRest')
+});
+
 router.get('/:id', function (req, res, next) {
   const renderObj = {};
 
-});
-
-router.get('/new', function (req, res, next) {
-  const renderObj = {};
-  res.render('newRest', renderObj)
-  
 });
 
 router.get('/:id/reviews', function (req, res, next) {
