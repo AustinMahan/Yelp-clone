@@ -6,9 +6,9 @@ exports.up = function(knex, Promise) {
     table.string('review', [500]);
     table.integer('restaurant_id');
     table.integer('user_id');
-  })
+  });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('reviews')
+  return knex.schema.dropTable('reviews');
 };
