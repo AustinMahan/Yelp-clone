@@ -4,7 +4,6 @@ const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
   const renderObj = {};
-
 });
 
 router.get('/new', function (req, res, next) {
@@ -14,7 +13,7 @@ router.get('/new', function (req, res, next) {
 
 router.get('/:id', function (req, res, next) {
   const renderObj = {};
-
+  res.render('restaurant',renderObj);
 });
 
 router.get('/:id/reviews', function (req, res, next) {
