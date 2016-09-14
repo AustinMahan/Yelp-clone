@@ -12,13 +12,26 @@ router.get('/new', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
+  const restaurantID = req.params.id;
   const renderObj = {};
-  res.render('restaurant',renderObj);
+  knex('restaurants')
+  .where('restaurants.id', restaurantID)
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'reviews.review')
+  .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
+  .join('users', 'users.id', 'reviews.user_id')
+  .then((results) => {
+    renderObj.results = results;
+    console.log(results);
+    res.render('restaurant', renderObj);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 });
 
 router.get('/:id/reviews', function (req, res, next) {
   const renderObj = {};
-  
+
 });
 
 router.get('/:id/edit', function (req, res, next) {
@@ -37,12 +50,12 @@ router.get('/:id/reviews/new', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
-  res.send(req.body)
-  var type = req.body.type
-  var name = req.body.name
-  var streetAddress = req.body.streetAddress
-  var city = req.body.city
-  var location = `${req.body.streetAddress}, ${req.body.city}, ${req.body.state}`
+  res.send(req.body);
+  var type = req.body.type;
+  var name = req.body.name;
+  var streetAddress = req.body.streetAddress;
+  var city = req.body.city;
+  var location = `${req.body.streetAddress}, ${req.body.city}, ${req.body.state}`;
 });
 
 module.exports = router;
