@@ -12,6 +12,11 @@ router.get('/:id', function (req, res, next) {
 
 });
 
+router.get('/new', function (req, res, next) {
+  const renderObj = {};
+
+});
+
 router.get('/:id/reviews', function (req, res, next) {
   const renderObj = {};
 
@@ -31,6 +36,5 @@ router.get('/:id/reviews/new', function (req, res, next) {
   const renderObj = {};
 
 });
-
 
 module.exports = router;
