@@ -6,10 +6,8 @@ const indexController = require('../controllers/index');
 
 router.get('/', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
-  knex('users').where('id', 10).then(function (data) {
-    res.send(data);
-  });
+  renderObject.title = 'gRestaurants';
+  res.render('index', renderObject);
 });
 
 module.exports = router;
