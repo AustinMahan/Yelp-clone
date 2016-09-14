@@ -1,5 +1,5 @@
 var faker = require('faker');
-var types = ['Mexican', 'American', 'Italian', 'Chinese']
+var types = ['Mexican', 'American', 'Italian', 'Chinese'];
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
