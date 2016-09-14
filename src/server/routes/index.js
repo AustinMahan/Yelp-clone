@@ -6,7 +6,8 @@ const indexController = require('../controllers/index');
 
 router.get('/', function (req, res, next) {
   const renderObject = {};
-  renderObject.title = 'Welcome to Express!';
+  renderObject.title = 'gRestaurants';
+  res.render('index', renderObject);
 
 });
 
