@@ -7,9 +7,9 @@ exports.up = function(knex, Promise) {
     table.string('description', [500]);
     table.string('location');
     table.float('avg_review');
-  })
+  });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('restaurants')
+  return knex.schema.dropTable('restaurants');
 };

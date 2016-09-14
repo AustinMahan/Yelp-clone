@@ -5,10 +5,10 @@ exports.up = function(knex, Promise) {
     table.string('first_name');
     table.string('last_name');
     table.string('role');
-    table.integer('restaurant_id')
-  })
+    table.integer('restaurant_id');
+  });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('employees')
+  return knex.schema.dropTable('employees');
 };
