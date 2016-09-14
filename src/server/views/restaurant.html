@@ -12,16 +12,18 @@
   <div class="row">
     <div class="col-md-6">
         <h1>{{restaurant[0].name}}</h1>
-        <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
-        <h3>{{restaurant[0].location}}</h3>
-          <p>
-            {{restaurant[0].avg_rating}}
-          </p>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <img src="{{restaurant[0].url}}" alt="restaurant image" width="500"/>
+        <h4>{{restaurant[0].location}}</h4>
+        <div class="starsDiv" id="starsDiv">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <p id="starRating" class = "starRating">
+            {{restaurant[0].avg_review}}
+          </p>
+        </div>
         <p>
           {{restaurant[0].description}}
         </p>
@@ -59,4 +61,7 @@
   </div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="/js/restaurants.js"></script>
 {% endblock %}

@@ -22,7 +22,6 @@ router.get('/:id', function (req, res, next) {
     return renderObj;
   }).then(() => {
     res.render('restaurant', renderObj);
-    console.log(renderObj.restaurant[0]);
   });
 
 
