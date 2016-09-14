@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+{% block css %}<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">{% endblock %}
+
+{% block content %}
+
+  <div class="container col-md-3">
+    <form class="login" action="/" method="post">
+      <label for="username" class="text-center">Username</label>
+      <input type="text" name="username" class="form-control"><br>
+
+      <label for="password" class="">Password</label>
+      <input type="text" name="password" class="form-control">
+
+      <input type="submit" class="form-control">
+    </form>
+  </div>
+
+{% endblock %}

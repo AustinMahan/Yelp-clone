@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
   const renderObj = {};
-
+  res.render('login', renderObj)
 });
 
 router.post('/', function (req, res, next) {
