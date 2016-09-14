@@ -6,13 +6,18 @@
 {% block content %}
 
   <div class="container col-md-3">
-    <form class="login" action="/" method="post">
+    <form class="login" action="/login" method="post">
       <label for="username" class="text-center">Username</label>
-      <input type="text" name="username" class="form-control"><br>
+      <input required type="text" name="username" class="form-control"><br>
 
       <label for="password" class="">Password</label>
-      <input type="text" name="password" class="form-control">
+      <input required type="text" name="password" class="form-control">
 
+      {% if err %}
+      <div class="logErr">
+        Your username and/or password is wrong.
+      </div>
+      {% endif %}
       <input type="submit" class="form-control">
     </form>
   </div>
