@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+    <form class="newRest" action="/restaurants/new" method="post">
+      <label for="name">Name</label>
+      <input type="text" name="name" class="form-control">
+
+      <label for="type">Type</label>
+      <select class="form-control" name="type">
+        <option value="mexican">Mexican</option>
+        <option value="american">American</option>
+        <option value="italian">Italian</option>
+        <option value="chinese">Chinese</option>
+      </select>
+    </form>
+  </div>
+
+{% endblock %}
