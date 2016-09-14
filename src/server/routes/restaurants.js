@@ -4,6 +4,7 @@ const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
   const renderObj = {};
+  res.send('hi')
 });
 
 router.get('/new', function (req, res, next) {
@@ -37,12 +38,14 @@ router.get('/:id/reviews/new', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
-  res.send(req.body)
-  var type = req.body.type
-  var name = req.body.name
-  var streetAddress = req.body.streetAddress
-  var city = req.body.city
-  var location = `${req.body.streetAddress}, ${req.body.city}, ${req.body.state}`
+  var type = req.body.type;
+  var name = req.body.name;
+  var location = `${req.body.streetAddress}, ${req.body.city}, ${req.body.state}`;
+  var description = req.body.description;
+
+  knex('restaurants').insert({ name, type, location, description }).then(() => {
+    res.redirect('/restaurants')
+  })
 });
 
 module.exports = router;
