@@ -12,9 +12,9 @@
 
     // *** register routes *** //
     app.use('/', routes);
-    app.use('/restaurants', restaurants)
-    app.use('/login', login)
-    app.use('/signup', signup)
+    app.use('/restaurants', restaurants);
+    app.use('/login', login);
+    app.use('/signup', signup);
 
   };
 

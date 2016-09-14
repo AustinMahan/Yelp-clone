@@ -20,7 +20,7 @@ router.get('/new', function (req, res, next) {
 
 router.get('/:id/reviews', function (req, res, next) {
   const renderObj = {};
-
+  // test comment
 });
 
 router.get('/:id/edit', function (req, res, next) {
