@@ -2,12 +2,14 @@
 
 {% block title %}{% endblock %}
 
+{% block css %}<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">{% endblock %}
+
 {% block content %}
 
-  <div class="container">
+  <div class="container col-md-6">
     <form class="newRest" action="/restaurants/new" method="post">
       <label for="name">Name</label>
-      <input type="text" name="name" class="form-control">
+      <input required type="text" name="name" class="form-control">
 
       <label for="type">Type</label>
       <select class="form-control" name="type">
@@ -15,7 +17,21 @@
         <option value="american">American</option>
         <option value="italian">Italian</option>
         <option value="chinese">Chinese</option>
-      </select>
+      </select><br>
+      <div class="col-md-4">
+        <label for="streetAddress">Street Address</label>
+        <input required type="text" name="streetAddress" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="city">City</label>
+        <input required type="text" name="city" class="form-control">
+      </div>
+      <div class="col-md-4">
+        <label for="state">State Abbreviation</label>
+        <input required type="text" name="state" class="form-control" maxlength="2" minlength='2'>
+      </div>
+      <textarea name="description" rows="8" cols="40" required></textarea>
+      <input type="submit" class="form-control">
     </form>
   </div>
 
