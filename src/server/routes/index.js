@@ -8,6 +8,7 @@ router.get('/', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'gRestaurants';
   res.render('index', renderObject);
+
 });
 
 module.exports = router;
