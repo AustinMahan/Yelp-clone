@@ -10,48 +10,75 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
-        <h1>Restaurant Name</h1>
+
+      {% if results[0] %}
+        <h1>{{results[0].name}}</h1>
+      {% endif %}
+
         <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
-        <h3>restaurant location</h3>
-        <button type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        {% if results[0] %}
+          <h1>{{results[0].location}}</h1>
+        {% endif %}
+        <div class="starsDiv" id="starsDiv">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-        </button>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <p id="starRating" class = "starRating">
+            {{results[0].avg_review}}
+          </p>
+        </div>
+
+        {% if results[0] %}
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+          {{results[0].description}}
         </p>
+        {% endif %}
+
         <h4><strong>Cuisine Type:</strong></h4>
+        {% if results[0] %}
+        <h5>
+          {{results[0].type}}
+        </h5>
+        {% endif %}
     </div>
     <div class="col-md-6">
 
-      <h2><strong># Reviews</strong></h2>
+      <h2><strong>{{ results[0] | length }} Reviews</strong></h2>
       <hr>
-        <div class="well reviews-well">
+      <div class="well reviews-well">
+        {% for result in results %}
           <div class="row">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              {{result.review}}
             </p>
           </div>
         <div class="row">
-          <div class="col-md-3">
-            <button type="button" class="btn btn-default btn-lg">
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            </button>
+          <div class="col-md-4">
+            <!-- <button type="button" class="btn btn-default btn-lg"> -->
+            <h5>
+              <div class="starsDiv" id="starsDiv">
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <p id="starRating" class = "starRating">
+                  {{result[0].rating}}
+                </p>
+              </div>
+            <!-- </button> -->
+          </h5>
           </div>
-          <div class="col-md-3">
-            <h5>01/23/2016</h5>
+          <div class="col-md-4 col-md-4-offset-4">
+            <h5>{{result[0].timestamp}}</h5>
           </div>
-          <div class="col-md-3">
-            <h5>First Name, Last Initial</h5>
+          <div class="col-md-4 col-md-4-offset-8">
+            <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
           </div>
         </div>
+      {% endfor %}
       </div>
     </div>
   </div>
