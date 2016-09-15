@@ -70,8 +70,12 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
+  const reviewID = req.params.id;
   const renderObj = {};
-
+  knex('reviews')
+  .where('reviews.id', reviewID)
+  .select('reviews.review')
+  .join('restaurants', 'restaurants.restaurant_id', )
 });
 
 router.get('/:id/edit', function (req, res, next) {
