@@ -120,33 +120,25 @@ router.post('/new', function (req, res, next) {
             Promise.all(promise).then(function() {
               res.redirect('/');
             });
-          }).catch(err => {
-            // res.send(err)
-          });
+          })
           res.redirect('/restaurants');
-        }).catch(function(err) {
-          // res.send(err)
-        });
-      }).catch(function(err) {
-        // res.send(err);
-      });
+        })
+      })
     } else {
       res.send('log in first');
     }
   }).catch(function(err) {
-    // res.send(err)
+    res.send(err)
   });
-  // res.redirect('/restaurants')
 });
 
 router.post('/search', function(req, res, next) {
-  var searchName = req.body.search;
-  knex('restaurants').where('name', 'like', `%${searchName}%`).then(function(data) {
+  var searchName = req.body.search.toLowerCase();
+  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `%${searchName}%`)).then(function(data) {
     if (data.length > 0) {
       res.redirect(`/restaurants/${data[0].id}`);
     }else {
-      // res.render('restaurants');
-      var something;
+      res.redirect('/restaurants');
     }
   });
 });
