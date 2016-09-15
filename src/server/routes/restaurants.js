@@ -66,7 +66,7 @@ router.get('/:id', function (req, res, next) {
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
-    console.log(err);
+    res.redirect('/restaurants');
   });
 });
 
@@ -88,9 +88,40 @@ router.get('/:id/edit', function (req, res, next) {
     res.render('restaurant_owner_edit', renderObj);
   })
   .catch((err) => {
-    console.log(err);
+    res.redirect('/restaurants');
   });
 });
+
+router.delete('/:id/delete', function (req, res, next) {
+  const restaurantID = parseInt(req.params.id);
+  knex('restaurants')
+  .del()
+  .where('id', restaurantID)
+  .returning('*')
+  .then((results) => {
+    if (results.length) {
+      res.status(200).json({
+        status: 'success',
+        message: `${results[0].title} is gone!`
+      });
+      res.redirect('/restaurants')
+    } else {
+      res.status(404).json({
+        status: 'errror',
+        message: 'That id does not exist'
+      });
+      res.redirect('/restaurants')
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'errror',
+      message: 'Something bad happened!'
+    });
+    res.redirect('/restaurants')
+  });
+});
+
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
   const renderObj = {};

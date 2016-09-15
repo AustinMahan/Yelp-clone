@@ -1,36 +1,22 @@
-*{
-  position: relative;
-  z-index: 1000;
-}
 .editUpdate{
+    opacity: 50%;
     position: absolute;
     z-index: 300;
 }
-.restaurantsIMG:hover{
-  position: relative;
-  z-index: 1;
-}
+
 .location h1{
   background-color: white;
 }
-.location h1:hover{
-  background-color: white;
-  position: relative;
-  z-index: 1;
-}
+
 .restaurantDescription{
   background-color: white;
 }
-.restaurantDescription:hover{
-  background-color: white;
-  position: relative;
-  z-index: 1;
-}
+
 .cuisineType{
   background-color: white;
 }
-.cuisineType:hover{
-  background-color: white;
-  position: relative;
-  z-index: 1;
+
+.entireListingEdit {
+  padding-left: 43%;
+  margin-bottom: 2.5%;
 }
