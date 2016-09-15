@@ -61,7 +61,7 @@ router.get('/:id', function (req, res, next) {
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
-    console.log(results[0].rating);
+    renderObj.title = results[0].name;
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
