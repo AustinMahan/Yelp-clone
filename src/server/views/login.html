@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+{% block css %}<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">{% endblock %}
+
+{% block content %}
+
+  <div class="container col-md-4  addForm col-md-offset-4">
+    <form class="login" action="/login" method="post">
+      <label for="username" class="text-center">Username</label>
+      <input required type="text" name="username" class="form-control"><br>
+
+      <label for="password" class="">Password</label>
+      <input required type="text" name="password" class="form-control">
+
+      {% if err %}
+      <div class="logErr">
+        username and/or password is wrong.
+      </div>
+      {% endif %}
+      <input type="submit" class="form-control">
+    </form>
+  </div>
+
+{% endblock %}

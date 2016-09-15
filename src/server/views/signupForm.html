@@ -1,0 +1,31 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+{% block css %}<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">{% endblock %}
+
+{% block content %}
+
+  <div class="container col-md-4  addForm col-md-offset-4">
+    <form class="login" action="/signup" method="post">
+      <label for="first_name" class="text-center">First Name</label>
+      <input required type="text" name="first_name" class="form-control"><br>
+
+      <label for="last_name" class="text-center">Last Name</label>
+      <input required type="text" name="last_name" class="form-control"><br>
+
+      <label for="username" class="text-center">Username</label>
+      <input required type="text" name="username" class="form-control"><br>
+
+      <label for="password" class="">Password</label>
+      <input required type="password" name="password" class="form-control">
+
+      {% if err %}
+      <div class="logErr">
+        username is already in use.
+      </div>
+      {% endif %}
+      <input type="submit" class="form-control">
+    </form>
+  </div>
+
+{% endblock %}
