@@ -4,6 +4,7 @@
 
 {% block css %}
   <link rel="stylesheet" href="/css/restaurant.css">
+  <link rel="stylesheet" href="/css/edit.css">
 {% endblock %}
 
 {% block content %}
@@ -14,9 +15,17 @@
       {% if results[0] %}
         <h1>{{results[0].name}}</h1>
       {% endif %}
-        <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
+          {% include "owner_edit.html" %}
+        <div class="restaurantsIMG">
+          <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
+        </div>
+
+
         {% if results[0] %}
+        <div class="location">
+          {% include "owner_edit.html" %}
           <h1>{{results[0].location}}</h1>
+        </div>
         {% endif %}
         <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -30,17 +39,22 @@
         </div>
 
         {% if results[0] %}
-        <p>
+        {% include "owner_edit.html" %}
+        <p class="restaurantDescription">
           {{results[0].description}}
         </p>
         {% endif %}
-
-        <h4><strong>Cuisine Type:</strong></h4>
-        {% if results[0] %}
-        <h5>
-          {{results[0].type}}
-        </h5>
-        {% endif %}
+        {% include "owner_edit.html" %}
+        <div class="cuisineType">
+          <h4 class="cuisineType">
+            <strong>Cuisine Type:</strong>
+          </h4>
+          {% if results[0] %}
+          <h5>
+            {{results[0].type}}
+          </h5>
+          {% endif %}
+        </div>
     </div>
     <div class="col-md-6">
 

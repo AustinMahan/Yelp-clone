@@ -1,4 +1,4 @@
-var faker = require('faker')
+var faker = require('faker');
 var type_img = [{
   type: 'Mexican',
   url: 'http://previews.123rf.com/images/pxhidalgo/pxhidalgo1209/pxhidalgo120900200/15468017-traditional-mexican-food-Stock-Photo.jpg'
@@ -102,5 +102,5 @@ return knex('restaurants').del()
       changeI(),
       knex('restaurants').insert({name: faker.company.companyName(), type: type_img[i].type, description: faker.lorem.paragraph(), location: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()}`, url: type_img[i].url})
     ]);
-  });
+  }); 
 };
