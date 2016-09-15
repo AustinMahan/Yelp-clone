@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
   const renderObj = {};
-  res.send('hi')
+  res.send('hi');
 });
 
 router.get('/new', function (req, res, next) {
@@ -44,8 +44,8 @@ router.post('/new', function (req, res, next) {
   var description = req.body.description;
 
   knex('restaurants').insert({ name, type, location, description }).then(() => {
-    res.redirect('/restaurants')
-  })
+    res.redirect('/restaurants');
+  });
 });
 
 module.exports = router;

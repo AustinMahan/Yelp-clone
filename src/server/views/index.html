@@ -12,24 +12,14 @@
     </div>
     <br>
     <div class="row container-fluid">
+      {% for restaurant in restaurants %}
       <figure class="figure col-md-4">
         <img src="./media/table-top.jpeg" class="col-xs-12">
-        <h4 class="col-md-12">Restaurant Name</h4>
-        <h5 class="col-md-12">Location</h5>
-        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
+        <h4 class="col-md-12">{{ restaurant.name }}</h4>
+        <h5 class="col-md-12">{{ restaurant.location }}</h5>
+        <figcaption class="col-md-12 figure-caption">{{ restaurant.description }}</figcaption>
       </figure>
-      <figure class="figure col-md-4">
-        <img src="./media/table-top.jpeg" class="col-xs-12">
-        <h4 class="col-md-12">Restaurant Name</h4>
-        <h5 class="col-md-12">Location</h5>
-        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
-      </figure>
-      <figure class="figure col-md-4">
-        <img src="./media/table-top.jpeg" class="col-xs-12">
-        <h4 class="col-md-12">Restaurant Name</h4>
-        <h5 class="col-md-12">Location</h5>
-        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
-      </figure>
+      {% endfor %}
     </div>
     <br>
   </div>
