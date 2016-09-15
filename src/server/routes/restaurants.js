@@ -9,7 +9,6 @@ router.get('/', function (req, res, next) {
   .select('*')
   .then((restaurants) => {
     renderObj.restaurants = restaurants;
-    console.log(renderObj.restaurants);
     return renderObj;
   }).then(() => {
     res.render('restaurants', renderObj);
@@ -26,12 +25,12 @@ router.get('/:id', function (req, res, next) {
   const renderObj = {};
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.timestamp')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
-    console.log(results);
+    console.log(results[0].rating);
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
