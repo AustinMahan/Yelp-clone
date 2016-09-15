@@ -38,6 +38,7 @@ router.get('/page/:id', function (req, res, next) {
     if (pages > pageNum) {
       more = true;
     }
+    renderObj.title = `Restaurants pg. (${pageNum})`;
     renderObj.more = more;
     renderObj.nextPage = pageNum + 1;
     console.log(renderObj.nextPage);
