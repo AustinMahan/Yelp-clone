@@ -92,21 +92,58 @@ router.get('/:id/edit', function (req, res, next) {
 });
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
-  // const renderObj = {};
-  // const reviewID = req.params.id;
-  // knex('reviews')
-  // .where('reviews.id', reviewID)
-  // .select('reviews.review')
-  // .join('restaurants', 'restaurants.id', 'reviews.restaurant_id')
-  // .join('users', 'users.id', 'reviews.user_id')
-  // .then((results) => {
-  //   renderObj.results = results;
-  //   console.log(results);
-  //   res.render('review_user_edit', renderObj);
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
+  const renderObj = {};
+  const restaurantID = req.params.id;
+  const reviewID = req.params.revId;
+  knex('reviews')
+  .where('reviews.id', reviewID)
+  .select('restaurants.name', 'users.first_name', 'users.last_name', 'reviews.rating', 'reviews.review')
+  .join('restaurants', 'restaurants.id', 'reviews.restaurant_id')
+  .join('users', 'users.id', 'reviews.user_id')
+  .then((results) => {
+    renderObj.results = results[0];
+    renderObj.restaurantID = restaurantID;
+    renderObj.reviewID = reviewID;
+    console.log(results);
+    res.render('review_user_edit', renderObj);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+});
+
+router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
+  let renderObj = {};
+  let restaurantID = req.params.id;
+  let reviewID = req.params.revId;
+  let updatedReview = req.body.review;
+  let updatedRating = req.body.rating;
+  console.log(req.body);
+  knex('reviews')
+  .update({
+    rating: updatedRating,
+    review: updatedReview,
+  })
+  .where('id', reviewID)
+  .returning('*')
+  .then((results) => {
+    console.log(results);
+    if (results.length) {
+      res.status(200);
+      res.redirect(`/restaurants/${restaurantID}`);
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'That id does not exist'
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'error',
+      message: 'Updated Failed'
+    });
+  });
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {

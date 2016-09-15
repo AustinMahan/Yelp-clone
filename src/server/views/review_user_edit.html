@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+{% block title %}
+{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="/css/restaurant.css">
+  <link rel="stylesheet" href="/css/edit.css">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+
+      <h2>Editing Review for {{results.name}}</h2>
+
+          <!-- {% include "owner_edit.html" %} -->
+      <h4>Posting as: {{results.first_name}} {{results.first_name}}</h4>
+
+    <form method="POST" action="/restaurants/{{restaurantID}}/review/{{reviewID}}/edit/submit">
+    <div class='rating_radio' data-id='{{results.rating}}'>
+      <label class="radio-inline">
+        <input type="radio" name="rating" id="inlineRadio1" value="1"> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="rating" id="inlineRadio2" value="2"> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="rating" id="inlineRadio3" value="3"> 3
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="rating" id="inlineRadio4" value="4"> 4
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="rating" id="inlineRadio5" value="5"> 5
+      </label>
+  </div>
+          <!-- {% include "owner_edit.html" %} -->
+          <br>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" rows="3" name="review" id="book-update-description">{{results.review}}</textarea>
+    </div>
+    <br>
+    <button type="edit_review" class="btn btn-lrg review_edit_submit">Edit Review</button>
+  </form>
+  <br>
+
+
+
+          {% if results[0] %}
+          <h5>
+            {{results[0].type}}
+          </h5>
+          {% endif %}
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="/js/restaurants.js"></script>
+{% endblock %}
