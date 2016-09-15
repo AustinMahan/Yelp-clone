@@ -6,7 +6,7 @@
 
 {% block content %}
 
-  <div class="container col-md-6">
+  <div class="container col-md-6 addForm col-md-offset-3">
     <form class="newRest" action="/restaurants/new" method="post">
       <label for="name">Name</label>
       <input required type="text" name="name" class="form-control">
@@ -30,9 +30,24 @@
         <label for="state">State Abbreviation</label>
         <input required type="text" name="state" class="form-control" maxlength="2" minlength='2'>
       </div>
+      <label for="description">Description</label>
       <textarea name="description" rows="8" cols="40" required></textarea>
+      <div class="col-md-6">
+        <label for="owner_first">Owner First Name</label>
+        <input required type="text" class="form-control" name="owner_first">
+      </div>
+      <div class="col-md-6">
+        <label for="owner_last">Owner Last Name</label>
+        <input required type="text" class="form-control" name="owner_last">
+      </div>
+
+      <p id="addEmpl">
+        Add Employee
+      </p>
       <input type="submit" class="form-control">
     </form>
   </div>
 
 {% endblock %}
+
+{% block scripts %}<script type="text/javascript" src="/js/addRest.js"></script>{% endblock %}
