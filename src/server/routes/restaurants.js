@@ -139,13 +139,12 @@ router.post('/new', function (req, res, next) {
 });
 
 router.post('/search', function(req, res, next) {
-  var searchName = req.body.search;
-  knex('restaurants').where('name', 'like', `%${searchName}%`).then(function(data) {
+  var searchName = req.body.search.toLowerCase();
+  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `%${searchName}%`)).then(function(data) {
     if (data.length > 0) {
       res.redirect(`/restaurants/${data[0].id}`);
     }else {
-      // res.render('restaurants');
-      var something;
+      res.redirect('/restaurants');
     }
   });
 });
