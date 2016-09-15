@@ -119,23 +119,16 @@ router.post('/new', function (req, res, next) {
             Promise.all(promise).then(function() {
               res.redirect('/');
             });
-          }).catch(err => {
-            // res.send(err)
-          });
+          })
           res.redirect('/restaurants');
-        }).catch(function(err) {
-          // res.send(err)
-        });
-      }).catch(function(err) {
-        // res.send(err);
-      });
+        })
+      })
     } else {
       res.send('log in first');
     }
   }).catch(function(err) {
-    // res.send(err)
+    res.send(err)
   });
-  // res.redirect('/restaurants')
 });
 
 router.post('/search', function(req, res, next) {
