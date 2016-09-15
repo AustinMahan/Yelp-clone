@@ -38,6 +38,7 @@ router.get('/page/:id', function (req, res, next) {
     if (pages > pageNum) {
       more = true;
     }
+    renderObj.title = `Restaurants pg. (${pageNum})`;
     renderObj.more = more;
     renderObj.nextPage = pageNum + 1;
     console.log(renderObj.nextPage);
@@ -61,7 +62,7 @@ router.get('/:id', function (req, res, next) {
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
-    console.log(results);
+    renderObj.title = results[0].name;
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
@@ -74,8 +75,21 @@ router.get('/:id/reviews', function (req, res, next) {
 });
 
 router.get('/:id/edit', function (req, res, next) {
+  const restaurantID = req.params.id;
   const renderObj = {};
-
+  knex('restaurants')
+  .where('restaurants.id', restaurantID)
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
+  .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
+  .join('users', 'users.id', 'reviews.user_id')
+  .then((results) => {
+    renderObj.results = results;
+    renderObj.title = results[0].name;
+    res.render('restaurant_owner_edit', renderObj);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 });
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
