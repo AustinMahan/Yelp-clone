@@ -84,4 +84,9 @@ router.post('/new', function (req, res, next) {
   // res.redirect('/restaurants')
 });
 
+router.post('/search', function(req, res, next) {
+  // var searchName = req.body.
+  console.log(req.body);
+})
+
 module.exports = router;
