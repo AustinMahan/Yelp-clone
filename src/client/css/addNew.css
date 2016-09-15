@@ -1,4 +1,6 @@
-
+.addForm{
+  margin-top: 75px;
+}
 
 textarea{
   margin-top: 20px;
@@ -7,4 +9,19 @@ textarea{
 
 .login{
   text-align: center;
+}
+
+#addEmpl{
+  float: right;
+  padding: 15px;
+  font-size: 14px;
+  color: blue;
+}
+
+#addEmpl:hover{
+  cursor: pointer;
+}
+
+.oneEmp{
+  margin-top: 50px;
 }

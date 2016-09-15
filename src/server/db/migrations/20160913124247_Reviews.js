@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('review', [500]);
     table.integer('restaurant_id');
     table.integer('user_id');
+    table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };
 

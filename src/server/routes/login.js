@@ -17,12 +17,17 @@ router.get('/logErr', function (req, res, next) {
 router.post('/', function (req, res, next) {
   knex('users').where('username', req.body.username).then((data) => {
     if (data.length > 0) {
-      if (bcrypt.compareSync(req.body.password, data.password)){
-        req.session.user = data[0]
-        res.redirect('/restaurants')
-      }else {
-        res.redirect('/login/logErr')
-      }
+      bcrypt.compare(req.body.password, data[0].password, function(err, resp) {
+        if (err) {
+          res.send(err)
+        }
+        if (resp) {
+          req.session.user = data[0];
+          res.redirect('/restaurants')
+        } else {
+          res.redirect('/login/logErr')
+        }
+      })
     }else {
       res.redirect('/login/logErr')
     }

@@ -4,9 +4,34 @@
 
 {% block content %}
 
-  <div class="container">
-    <h1>{{title}}</h1>
-    <h2>The sum is {{sum}}</h2>
+  <div class="container-fluid">
+    <img class="main-img" src="./media/main-img.jpeg">
+    <h1 class="welcome-tag">Welcome to gRestaurants</h1>
+    <div class="row">
+      <h2 class="text-center">Featured Restaurants</h2>
+    </div>
+    <br>
+    <div class="row container-fluid">
+      <figure class="figure col-md-4">
+        <img src="./media/table-top.jpeg" class="col-xs-12">
+        <h4 class="col-md-12">Restaurant Name</h4>
+        <h5 class="col-md-12">Location</h5>
+        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
+      </figure>
+      <figure class="figure col-md-4">
+        <img src="./media/table-top.jpeg" class="col-xs-12">
+        <h4 class="col-md-12">Restaurant Name</h4>
+        <h5 class="col-md-12">Location</h5>
+        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
+      </figure>
+      <figure class="figure col-md-4">
+        <img src="./media/table-top.jpeg" class="col-xs-12">
+        <h4 class="col-md-12">Restaurant Name</h4>
+        <h5 class="col-md-12">Location</h5>
+        <figcaption class="col-md-12 figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</figcaption>
+      </figure>
+    </div>
+    <br>
   </div>
 
 {% endblock %}

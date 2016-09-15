@@ -1,8 +1,35 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  padding: 0 auto;
 }
 
-a {
-  color: #00B7FF;
+.navbar-custom,
+.footer-custom {
+  background: #404040;
+  border-radius: 0;
+  border: none;
+}
+
+#navbar-collapse-1 ul li a:hover {
+  color: #F7901E;
+}
+
+.footer-custom {
+  padding-top: 1.8vh;
+  color: #F7901E;
+}
+
+.main-img {
+  width: 100%;
+  position: relative;
+}
+
+.welcome-tag {
+   position: absolute;
+   top: 25vh;
+   left: 1.5vw;
+   background: rgba(0, 0, 0, 0.5);
+   color: #fff;
+   font-size: 5vw;
+   font: Helvetica, Sans-Serif;
 }
