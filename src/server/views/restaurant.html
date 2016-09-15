@@ -26,7 +26,7 @@
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <p id="starRating" class = "starRating">
-            {{restaurant[0].avg_review}}
+            {{results[0].avg_review}}
           </p>
         </div>
 
@@ -58,16 +58,21 @@
           <div class="col-md-4">
             <!-- <button type="button" class="btn btn-default btn-lg"> -->
             <h5>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+              <div class="starsDiv" id="starsDiv">
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+                <p id="starRating" class = "starRating">
+                  {{result[0].rating}}
+                </p>
+              </div>
             <!-- </button> -->
           </h5>
           </div>
           <div class="col-md-4 col-md-4-offset-4">
-            <h5>01/23/2016 FIX ME</h5>
+            <h5>{{result[0].timestamp}}</h5>
           </div>
           <div class="col-md-4 col-md-4-offset-8">
             <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
