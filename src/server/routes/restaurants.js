@@ -71,7 +71,6 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
-  const renderObj = {};
 
 });
 

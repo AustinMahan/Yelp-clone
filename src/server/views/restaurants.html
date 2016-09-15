@@ -18,16 +18,17 @@
         <h1>{{restaurant.name}}</h1>
         <img src="{{restaurant.url}}" alt="restaurant image" width="250"/>
         <h4>{{restaurant.location}}</h4>
-        <div class="starsDiv" id="starsDiv">
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <p id="starRating" class = "starRating">
-            {{restaurant.avg_review}}
-          </p>
-        </div>
+        <h5>
+          <div class="starsDiv" id="{{restaurant.id}}review">
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+            <p id="starRating" class = "starRating">
+              {{restaurant.avg_review}}
+            </p>
+          </div>
         <p>
           {{restaurant.description}}
         </p>
