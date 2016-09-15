@@ -4,7 +4,7 @@ const knex = require('../db/knex');
 
 const indexController = require('../controllers/index');
 
-router.get('/', function (req, res, next) {
+router.get('/', (req, res, next) => {
   const renderObject = {};
   renderObject.title = 'gRestaurants';
   knex('restaurants').select()
