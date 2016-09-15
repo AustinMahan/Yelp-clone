@@ -9,7 +9,7 @@
     const restaurants = require('../routes/restaurants');
     const login = require('../routes/login');
     const signup = require('../routes/signup');
-    const cookieSession = require('cookie-session')
+    const cookieSession = require('cookie-session');
 
     // *** register routes *** //
     app.use(cookieSession({
