@@ -1,7 +1,7 @@
 (function () {
   var i = 0;
   $('#addEmpl').click(function() {
-    i++
+    i++;
     $(` <div class="oneEmp">
     <br>
     <br>
@@ -18,7 +18,7 @@
           <label for="role">Role</label>
           <input class="form-control" type="text" name="role-${i}">
         </div>
-      </div>`).insertBefore('#addEmpl')
-  })
+      </div>`).insertBefore('#addEmpl');
+  });
 
 })();
