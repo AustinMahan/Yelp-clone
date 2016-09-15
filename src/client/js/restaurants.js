@@ -6,6 +6,10 @@ console.log("restaurants.js sanity check");
       var starsDivID = "#" + $(this).attr("id");
       fillStars(starsDivID);
     });
+
+    selectRadioButton();
+
+
   }());
 
   function fillStars(starsDivID) {
@@ -42,5 +46,25 @@ console.log("restaurants.js sanity check");
     thirdStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
     fourthStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
     fifthStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
+  }
+}
+
+function selectRadioButton() {
+  var rating = $( ".rating_radio" ).attr('data-id');
+  console.log(rating);
+  if (rating >= 0 && rating < 1) {
+    $('#inlineRadio1').attr('checked', true);
+  }
+  else if (rating >= 1 && rating < 2) {
+    $('#inlineRadio2').attr('checked', true);
+  }
+  else if (rating >= 2 && rating < 3) {
+    $('#inlineRadio3').attr('checked', true);
+  }
+  else if (rating >= 3 && rating < 4) {
+    $('#inlineRadio4').attr('checked', true);
+  }
+  else if (rating >= 4 && rating <= 5) {
+    $('#inlineRadio5').attr('checked', true);
   }
 }
