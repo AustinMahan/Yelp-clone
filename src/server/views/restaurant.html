@@ -18,7 +18,7 @@
         {% if results[0] %}
           <h1>{{results[0].location}}</h1>
         {% endif %}
-        <div class="starsDiv" id="starsDiv">
+        <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -57,14 +57,14 @@
           <div class="col-md-4">
             <!-- <button type="button" class="btn btn-default btn-lg"> -->
             <h5>
-              <div class="starsDiv" id="starsDiv">
+              <div class="starsDiv" id="{{result.user_id}}review">
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
                 <p id="starRating" class = "starRating">
-                  {{result[0].rating}}
+                  {{result.rating}}
                 </p>
               </div>
             <!-- </button> -->
