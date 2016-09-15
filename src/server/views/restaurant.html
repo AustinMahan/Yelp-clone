@@ -7,14 +7,13 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
-
       {% if results[0] %}
         <h1>{{results[0].name}}</h1>
       {% endif %}
-
         <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
         {% if results[0] %}
           <h1>{{results[0].location}}</h1>
@@ -84,4 +83,7 @@
   </div>
 </div>
 
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="/js/restaurants.js"></script>
 {% endblock %}

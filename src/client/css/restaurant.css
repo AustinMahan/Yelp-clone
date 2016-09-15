@@ -2,3 +2,7 @@
   overflow-y: scroll;
   height: 400px;
 }
+
+.starRating{
+  display: none;
+}
