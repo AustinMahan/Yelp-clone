@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('type');
     table.string('description', [500]);
     table.string('location');
-    table.float('avg_review');
+    table.float('avg_review').defaultTo(0.00)
   });
 };
 
