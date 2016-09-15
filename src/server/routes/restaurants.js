@@ -5,15 +5,46 @@ const knex = require('../db/knex');
 router.get('/', function (req, res, next) {
   const restaurantID = req.params.id;
   const renderObj = {};
+
   knex('restaurants')
   .select('*')
   .then((restaurants) => {
-    renderObj.restaurants = restaurants;
+    var more = false;
+    var pages = parseInt(restaurants.length / 9);
+    if (restaurants.length % 9 !== 0) {
+      more = true;
+    }
+    renderObj.more = more;
+    if (restaurants.length < 9) {
+      renderObj.restaurants = restaurants;
+    } else {
+      renderObj.restaurants = restaurants.slice(0, 9)
+    }
     return renderObj;
   }).then(() => {
-    res.render('restaurants', renderObj);
+    res.redirect('/restaurants/page/0');
   });
 });
+
+router.get('/page/:id', function (req, res, next) {
+  const pageNum = parseInt(req.params.id);
+  const renderObj = {};
+
+  knex('restaurants')
+  .select('*')
+  .then((restaurants) => {
+    var more = false;
+    var pages = parseInt(restaurants.length / 9);
+    if (pages > pageNum) {
+      more = true;
+    }
+    renderObj.more = more;
+    renderObj.nextPage = pageNum + 1;
+    console.log(renderObj.nextPage);
+    renderObj.restaurants = restaurants.slice((9 * pageNum), (9 * (pageNum + 1)));
+    res.render('restaurants', renderObj);
+  })
+})
 
 router.get('/new', function (req, res, next) {
   const renderObj = {};

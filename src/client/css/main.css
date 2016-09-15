@@ -27,7 +27,8 @@ body {
 
 .welcome-tag {
    position: absolute;
-   top: 25vh;
+   padding: 5px;
+   top: 22vh;
    left: 1.5vw;
    background: rgba(0, 0, 0, 0.5);
    color: #fff;

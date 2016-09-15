@@ -7,8 +7,16 @@ const indexController = require('../controllers/index');
 router.get('/', function (req, res, next) {
   const renderObject = {};
   renderObject.title = 'gRestaurants';
-  res.render('index', renderObject);
-
+  knex('restaurants').select()
+  .orderBy('avg_review', 'desc')
+  .limit(3)
+  .then((results) => {
+    renderObject.restaurants = results;
+    res.render('index', renderObject);
+  })
+  .catch((err) => {
+    return next(err);
+  });
 });
 
 module.exports = router;
