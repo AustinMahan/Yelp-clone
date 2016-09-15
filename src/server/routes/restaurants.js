@@ -5,6 +5,7 @@ const knex = require('../db/knex');
 router.get('/', function (req, res, next) {
   const restaurantID = req.params.id;
   const renderObj = {};
+
   knex('restaurants')
   .select('*')
   .then((restaurants) => {

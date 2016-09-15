@@ -28,7 +28,7 @@ router.post('/', function (req, res, next) {
           res.redirect('/login/logErr');
         }
       });
-    }else {
+    } else {
       res.redirect('/login/logErr');
     }
   });
