@@ -61,7 +61,7 @@ router.get('/:id', function (req, res, next) {
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
-    console.log(results[0].rating);
+    console.log(results);
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
@@ -70,12 +70,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
-  const reviewID = req.params.id;
-  const renderObj = {};
-  knex('reviews')
-  .where('reviews.id', reviewID)
-  .select('reviews.review')
-  .join('restaurants', 'restaurants.restaurant_id', )
+
 });
 
 router.get('/:id/edit', function (req, res, next) {
