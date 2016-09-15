@@ -3,8 +3,17 @@ const router = express.Router();
 const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
+  const restaurantID = req.params.id;
   const renderObj = {};
-  res.send('hi')
+  knex('restaurants')
+  .select('*')
+  .then((restaurants) => {
+    renderObj.restaurants = restaurants;
+    console.log(renderObj.restaurants);
+    return renderObj;
+  }).then(() => {
+    res.render('restaurants', renderObj);
+  });
 });
 
 router.get('/new', function (req, res, next) {
