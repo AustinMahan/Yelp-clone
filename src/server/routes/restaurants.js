@@ -61,7 +61,6 @@ router.get('/:id', function (req, res, next) {
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
-    console.log(results);
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
@@ -70,7 +69,6 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
-
 });
 
 router.get('/:id/edit', function (req, res, next) {
@@ -79,8 +77,21 @@ router.get('/:id/edit', function (req, res, next) {
 });
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
-  const renderObj = {};
-
+  // const renderObj = {};
+  // const reviewID = req.params.id;
+  // knex('reviews')
+  // .where('reviews.id', reviewID)
+  // .select('reviews.review')
+  // .join('restaurants', 'restaurants.id', 'reviews.restaurant_id')
+  // .join('users', 'users.id', 'reviews.user_id')
+  // .then((results) => {
+  //   renderObj.results = results;
+  //   console.log(results);
+  //   res.render('review_user_edit', renderObj);
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {
