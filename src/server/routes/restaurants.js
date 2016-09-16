@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
     if (restaurants.length < 9) {
       renderObj.restaurants = restaurants;
     } else {
-      renderObj.restaurants = restaurants.slice(0, 9)
+      renderObj.restaurants = restaurants.slice(0, 9);
     }
     return renderObj;
   }).then(() => {
@@ -44,8 +44,8 @@ router.get('/page/:id', function (req, res, next) {
     console.log(renderObj.nextPage);
     renderObj.restaurants = restaurants.slice((9 * pageNum), (9 * (pageNum + 1)));
     res.render('restaurants', renderObj);
-  })
-})
+  });
+});
 
 router.get('/new', function (req, res, next) {
   const renderObj = {};
@@ -115,17 +115,17 @@ router.get('/:id/reviews/new', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
-  res.send(req.body);
   var type = req.body.type;
   var name = req.body.name;
   var streetAddress = req.body.streetAddress;
   var city = req.body.city;
+  var url = req.body.url;
   var location = `${req.body.streetAddress}, ${req.body.city}, ${req.body.state}`;
   var description = req.body.description;
 
   knex('users').where('first_name', req.body.owner_first).then(function(data) {
     if (data.length > 0) {
-      knex('restaurants').insert({ name, type, location, description }).then(function() {
+      knex('restaurants').insert({ name, type, location, description, url }).then(function() {
         knex('restaurants').where('location', location).where('name', name).select('id').then(function(restId) {
           console.log(restId[0].id);
           knex('users').where('id', data[0].id).update('owner_id', restId[0].id).then(function() {
@@ -144,15 +144,15 @@ router.post('/new', function (req, res, next) {
             Promise.all(promise).then(function() {
               res.redirect('/');
             });
-          })
+          });
           res.redirect('/restaurants');
-        })
-      })
+        });
+      });
     } else {
       res.send('log in first');
     }
   }).catch(function(err) {
-    res.send(err)
+    res.send(err);
   });
 });
 

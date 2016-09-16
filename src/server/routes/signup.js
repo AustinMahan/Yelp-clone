@@ -10,8 +10,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/err', function (req, res, next) {
-  renderObj.title = `User Signup Error`;
   const renderObj = {};
+  renderObj.title = `User Signup Error`;
   renderObj.err = true;
   res.render('signupForm', renderObj);
 });
