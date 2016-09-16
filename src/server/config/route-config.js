@@ -10,6 +10,7 @@
     const login = require('../routes/login');
     const signup = require('../routes/signup');
     const cookieSession = require('cookie-session');
+    const knex = require('../db/knex')
 
     // *** register routes *** //
     app.use(cookieSession({
@@ -19,8 +20,18 @@
 
     app.use(function(req, res, next) {
       req.renderObj = {};
-      req.renderObj.user = req.session.user;
-      next();
+      if (req.session.user) {
+        knex('users').where('id', req.session.user.id).then((data) => {
+          if (data.length > 0) {
+            req.renderObj.user = data[0];
+          }else {
+            req.renderObj.user = undefined;
+          }
+        });
+        next();
+      } else {
+        next()
+      }
     });
 
     app.use('/', routes);

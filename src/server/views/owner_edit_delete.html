@@ -1,8 +1,13 @@
 <div class="editDelete" id="editDelete">
-  <button class="btn btn-lg btn-danger delete-btn">
+  <button class="btn btn-lg btn-danger delete-btn" data-id={{results[0].restaurant_id}}>
     &#x2716;
   </button>
-  <button type="button" class="btn btn-primary btn-lg update-btn">
+  <button type="button" class="btn btn-warning btn-lg update-btn" data-toggle="modal" data-target="#myModal" data-id={{results[0].restaurant_id}}
+  data-restaurantName={{results[0].name}}
+  data-restaurantIMG={{results[0].url}}
+  data-location={{results[0].location}}
+  data-restaurantDescription={{results[0].description}}
+  data-cuisineType={{results[0].type}}}>
     UPDATE
   </button>
 </div>

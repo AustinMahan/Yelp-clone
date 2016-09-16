@@ -15,9 +15,9 @@
 
       <h2>Editing Review for {{results.name}}</h2>
 
-      <h4>Posting as: {{results.first_name}} {{results.first_name}}</h4>
+      <h4>Posting as: {{user.first_name}} {{user.last_name}}</h4>
 
-    <form method="POST" action='/restaurants/{{restaurantID}}/review/{{reviewID}}/edit/submit'>
+    <form method="POST" action="/restaurants/{{restaurantID}}/review/new/submit">
     <div class='rating_radio' data-id='{{results.rating}}'>
 
       <label class="radio-inline">
@@ -39,22 +39,15 @@
 
           <br>
 
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" rows="3" name="review" id="book-update-description">{{results.review}}</textarea>
-    </div>
-    <br>
-    <button type="edit_review" class="btn btn-lrg review_edit_submit">Edit Review</button>
-  </form>
-  <br>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" rows="3" name="review" id="book-update-description">{{results.review}}</textarea>
+          </div>
+          <br>
+          <button type="submit_review" class="btn btn-lrg review_submit">Submit New Review</button>
+        </form>
+        <br>
 
-
-
-          {% if results[0] %}
-          <h5>
-            {{results[0].type}}
-          </h5>
-          {% endif %}
         </div>
     </div>
   </div>

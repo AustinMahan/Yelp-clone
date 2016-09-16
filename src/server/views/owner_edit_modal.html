@@ -1,0 +1,34 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form id="modal-form">
+                    <label for="restaurantName"> Restaurant Name:</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="restaurantName" id="restaurantName" placeholder="Chucky Cheese's">
+                    </div>
+                    <label for="restaurantIMG"> Restaurant Image URL:</label>
+                    <div class="form-group">
+                        <input type="url" class="form-control" name="restaurantIMG" id="restaurantIMG" placeholder="http://www.google.com">
+                    </div>
+                    <label for="location"> Location: </label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="location" id="location" placeholder="ex: 123 Fake St., Denver, CO">
+                    </div>
+                    <label for="restaurantDescription"> Restaurant Description: </label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="restaurantDescription" id="restaurantDescription" placeholder="Delicious meats of all shapes and sizes...">
+                    </div>
+                    <label for="cuisineType"> Cuisine Type: </label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="cuisineType" id="cuisineType" placeholder="Italian">
+                    </div>
+                    <input type="hidden" name="id" id="input-id">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

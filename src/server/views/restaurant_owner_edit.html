@@ -9,21 +9,32 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid restaurantContainer">
+  <div class="row editListingRow">
+    <div class="col-md-10 col-md-offset-1">
+      <h1>Would you like to delete or edit the entire restaurant listing?</h1>
+      <div class="entireListingEdit">
+        {% include "owner_edit_delete.html" %}
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6">
-      {% if results[0] %}
-        <h1>{{results[0].name}}</h1>
-      {% endif %}
-          {% include "owner_edit.html" %}
-        <div class="restaurantsIMG">
-          <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
+      <div class="restaurantName">
+        {% if results[0] %}
+          {% include "owner_edit_modal.html" %}
+          <h1>{{results[0].name}}</h1>
+        {% endif %}
+      </div>
+        <div class="restaurantIMG">
+          {% if results[0] %}
+              <img src={{results[0].url}} alt="restaurant image" width="500"/>
+          {% endif %}
         </div>
 
 
         {% if results[0] %}
         <div class="location">
-          {% include "owner_edit.html" %}
           <h1>{{results[0].location}}</h1>
         </div>
         {% endif %}
@@ -39,12 +50,10 @@
         </div>
 
         {% if results[0] %}
-        {% include "owner_edit.html" %}
         <p class="restaurantDescription">
           {{results[0].description}}
         </p>
         {% endif %}
-        {% include "owner_edit.html" %}
         <div class="cuisineType">
           <h4 class="cuisineType">
             <strong>Cuisine Type:</strong>
@@ -92,14 +101,6 @@
         </div>
         <hr>
       {% endfor %}
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <h1>Would you like to delete or edit the entire restaurant listing?</h1>
-      <div class="entireListingEdit" data-id={{results[0].restaurant_id}}>
-        {% include "owner_edit_delete.html" %}
       </div>
     </div>
   </div>
