@@ -159,7 +159,7 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {
-  let renderObj = {};
+  var { renderObj } = req;
   let restaurantID = req.params.id;
   renderObj.restaurantID = restaurantID;
   res.render('review_new', renderObj);
