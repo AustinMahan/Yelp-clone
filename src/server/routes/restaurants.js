@@ -29,13 +29,13 @@ router.get('/page/:id', function (req, res, next) {
 });
 
 router.get('/new', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   res.render('newRest', {});
 });
 
 router.get('/:id', function (req, res, next) {
   const restaurantID = req.params.id;
-  const renderObj = {};
+  var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
   .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
@@ -56,7 +56,7 @@ router.get('/:id/reviews', function (req, res, next) {
 
 router.get('/:id/edit', function (req, res, next) {
   const restaurantID = req.params.id;
-  const renderObj = {};
+  var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
   .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
@@ -104,7 +104,7 @@ router.delete('/:id/delete', function (req, res, next) {
 
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   const restaurantID = req.params.id;
   const reviewID = req.params.revId;
   knex('reviews')
@@ -159,7 +159,7 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
 
 });
 
@@ -189,12 +189,10 @@ router.post('/new', function (req, res, next) {
 
               });
             });
-            res.redirect();
             Promise.all(promise).then(function() {
               res.redirect('/');
             });
           });
-          res.redirect('/restaurants');
         });
       });
     } else {
