@@ -27,8 +27,8 @@
           }else {
             req.renderObj.user = undefined;
           }
+          next();
         });
-        next();
       } else {
         next()
       }

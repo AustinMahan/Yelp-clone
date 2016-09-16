@@ -8,16 +8,12 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container single-rest">
   <div class="row">
     <div class="col-md-6">
-      {% if results[0] %}
-        <h1>{{results[0].name}}</h1>
-      {% endif %}
-        <img src={{results[0].url}} alt="restaurant image" width="500"/>
-        {% if results[0] %}
-          <h1>{{results[0].location}}</h1>
-        {% endif %}
+        <h1>{{restraurant.name}}</h1>
+        <img src="{{restraurant.url}}" alt="restaurant image" width="500"/>
+          <h1>{{restraurant.location}}</h1>
         <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -25,28 +21,24 @@
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
           <p id="starRating" class = "starRating">
-            {{results[0].avg_review}}
+            {{restraurant.avg_review}}
           </p>
         </div>
 
-        {% if results[0] %}
         <p>
-          {{results[0].description}}
+          {{restraurant.description}}
         </p>
-        {% endif %}
 
         <h4><strong>Cuisine Type:</strong></h4>
-        {% if results[0] %}
         <h5>
-          {{results[0].type}}
+          {{restraurant.type}}
         </h5>
-        {% endif %}
     </div>
     <div class="col-md-6">
 
-      <h2><strong>{{ results | length }} Reviews</strong></h2>
+      <h2><strong>{{ reviews | length }} Reviews</strong></h2>
       <div class="well reviews-well">
-        {% for result in results %}
+        {% for result in reviews %}
           <div class="row">
             <p>
               {{result.review}}

@@ -3,17 +3,19 @@
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="/css/restaurant.css">
+<link rel="stylesheet" href="/css/restaurant.css">
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="container restaurants">
+  <div class="row text-right">
+    <a href="/restaurants/new" class="btn btn-primary add-rest">Add New Restaurant</a>
+  </div>
+  {% for restaurant in restaurants %}
+  {% if loop.index % 3 == 0 %}
   <div class="row">
-    {% for restaurant in restaurants %}
-    {% if loop.index % 3 == 0 %}
-    <div class="row">
-    {% endif %}
+  {% endif %}
     <div class="col-md-4">
         <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" alt="restaurant image" class="col-xs-12"></a>
         <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{restaurant.name}}</h4></a>
@@ -24,7 +26,7 @@
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <p id="starRating" class = "starRating">
+            <p id="starRating" class="starRating">
               {{ restaurant.avg_review }}
             </p>
           </div>
@@ -34,13 +36,22 @@
         <h6 class="col-xs-12"><strong>Cuisine Type: {{ restaurant.type }}</strong></h6>
     </div>
     {% if loop.index % 3 == 0 %}
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% if more %}
-    <a href="/restaurants/page/{{ nextPage }}" style="margin-left: 49%;">Next</a>
-    {% endif %}
+  </div>
+  {% endif %}
+  {% endfor %}
+  <div class="row text-center" id="pagination">
+    <div class="btn-group" role="group">
+      {% if prev %}
+      <a type="button" class="btn btn-default" href="/restaurants/page/{{ prevPage }}"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+      {% endif %}
 
+      {% for page in allPages %}
+      <a type="button" class="btn btn-default" href="/restaurants/page/{{ page - 1 }}">{{ page }}</a>
+      {% endfor %}
+      {% if next %}
+      <a type="button" class="btn btn-default" href="/restaurants/page/{{ nextPage }}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+      {% endif %}
+    </div>
   </div>
 </div>
 
