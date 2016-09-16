@@ -6,15 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    {% if user %}
-      {% if user.admin %}
-      <h1>hey</h1>
-      <h1>{{user | dump}}</h1>
-      {% endif %}
-      {% if user.owner_id %}
-      <h1>{{user.owner_id}}</h1>
-      {% endif %}
-    {% endif %}
     {% if title %}
       <title>{{ title }}</title>
     {% else %}
