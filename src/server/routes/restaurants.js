@@ -117,7 +117,7 @@ router.get('/:id/review/:revId/edit', function (req, res, next) {
     renderObj.results = results[0];
     renderObj.restaurantID = restaurantID;
     renderObj.reviewID = reviewID;
-    console.log(results);
+    // console.log(results);
     res.render('review_user_edit', renderObj);
   })
   .catch((err) => {
@@ -131,6 +131,7 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
   let updatedRating = req.body.rating;
+  console.log(req.body);
   knex('reviews')
   .update({
     rating: updatedRating,
@@ -180,8 +181,10 @@ router.post('/:id/review/new/submit', function (req, res, next) {
   .then((results) => {
     console.log(results);
     if (results.length) {
-      res.status(200);
-      res.redirect(`/restaurants/${restaurantID}`);
+      knex('restaurants').where('id', restaurantID).update('avg_review', knex('reviews').avg('rating').where('restaurant_id', restaurantID)).then(() => {
+        res.status(200);
+        res.redirect(`/restaurants/${restaurantID}`);
+      });
     } else {
       res.status(404).json({
         status: 'error',
