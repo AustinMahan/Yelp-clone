@@ -4,13 +4,13 @@ const knex = require('../db/knex');
 const bcrypt = require('bcrypt');
 
 router.get('/', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   renderObj.title = `User Login`;
   res.render('login', renderObj);
 });
 
 router.get('/logErr', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   renderObj.title = `User Login Error`;
   renderObj.err = true;
   res.render('login', renderObj);
