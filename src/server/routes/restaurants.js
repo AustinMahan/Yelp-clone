@@ -4,31 +4,13 @@ const knex = require('../db/knex');
 
 router.get('/', function (req, res, next) {
   const restaurantID = req.params.id;
-  const renderObj = {};
 
-  knex('restaurants')
-  .select('*')
-  .then((restaurants) => {
-    var more = false;
-    var pages = parseInt(restaurants.length / 9);
-    if (restaurants.length % 9 !== 0) {
-      more = true;
-    }
-    renderObj.more = more;
-    if (restaurants.length < 9) {
-      renderObj.restaurants = restaurants;
-    } else {
-      renderObj.restaurants = restaurants.slice(0, 9);
-    }
-    return renderObj;
-  }).then(() => {
-    res.redirect('/restaurants/page/0');
-  });
+  res.redirect('/restaurants/page/0');
 });
 
 router.get('/page/:id', function (req, res, next) {
   const pageNum = parseInt(req.params.id);
-  const renderObj = {};
+  var { renderObj } = req;
 
   knex('restaurants')
   .select('*')
@@ -41,28 +23,28 @@ router.get('/page/:id', function (req, res, next) {
     renderObj.title = `Restaurants pg. (${pageNum})`;
     renderObj.more = more;
     renderObj.nextPage = pageNum + 1;
-    console.log(renderObj.nextPage);
     renderObj.restaurants = restaurants.slice((9 * pageNum), (9 * (pageNum + 1)));
     res.render('restaurants', renderObj);
   });
 });
 
 router.get('/new', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   res.render('newRest', {});
 });
 
 router.get('/:id', function (req, res, next) {
   const restaurantID = req.params.id;
-  const renderObj = {};
+  var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type','restaurants.url', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
+  .select('*')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
     renderObj.title = results[0].name;
+    renderObj.restaurantID = restaurantID;
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
@@ -75,7 +57,7 @@ router.get('/:id/reviews', function (req, res, next) {
 
 router.get('/:id/edit', function (req, res, next) {
   const restaurantID = req.params.id;
-  const renderObj = {};
+  var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
   .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type','restaurants.url', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
@@ -161,7 +143,7 @@ router.put('/:id/edit', (req, res, next) => {
 
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
   const restaurantID = req.params.id;
   const reviewID = req.params.revId;
   knex('reviews')
@@ -187,7 +169,6 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
   let updatedRating = req.body.rating;
-  console.log(req.body);
   knex('reviews')
   .update({
     rating: updatedRating,
@@ -216,8 +197,42 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {
-  const renderObj = {};
+  var { renderObj } = req;
+  let restaurantID = req.params.id;
+  renderObj.restaurantID = restaurantID;
+  res.render('review_new', renderObj);
+});
 
+router.post('/:id/review/new/submit', function (req, res, next) {
+  let renderObj = {};
+  let restaurantID = req.params.id;
+  let review = req.body.review;
+  let rating = req.body.rating;
+  console.log(req.body);
+  knex('reviews')
+  .insert({
+    rating: rating,
+    review: review
+  })
+  .returning('*')
+  .then((results) => {
+    console.log(results);
+    if (results.length) {
+      res.status(200);
+      res.redirect(`/restaurants/${restaurantID}`);
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'Error posting review'
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'error',
+      message: 'Review post Failed'
+    });
+  });
 });
 
 router.post('/new', function (req, res, next) {
@@ -246,12 +261,10 @@ router.post('/new', function (req, res, next) {
 
               });
             });
-            res.redirect();
             Promise.all(promise).then(function() {
               res.redirect('/');
             });
           });
-          res.redirect('/restaurants');
         });
       });
     } else {
