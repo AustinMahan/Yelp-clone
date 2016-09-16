@@ -40,11 +40,16 @@ router.get('/:id', function (req, res, next) {
   const restaurantID = req.params.id;
   var { renderObj } = req;
   knex('restaurants')
+  // .where('restaurants.id', restaurantID)
+  // .select('restaurants.id AS restaurant_uid', 'users.id AS user_id', '*')
+  // .join('reviews', 'reviews.restaurant_id', 'restaurant_id')
+  // .join('users', 'user_id', 'reviews.user_id')
   .where('restaurants.id', restaurantID)
-  .select('*')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'reviews.id AS review_id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
+    console.log(results);
     renderObj.results = results;
     renderObj.title = results[0].name;
     renderObj.restaurantID = restaurantID;
@@ -56,6 +61,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
+
 });
 
 router.get('/:id/edit', verifyUserExists, function (req, res, next) {
@@ -163,7 +169,6 @@ router.put('/:id/edit', (req, res, next) => {
 router.get('/:id/review/:revId/edit', function (req, res, next) {
   var { renderObj } = req;
   const restaurantID = req.params.id;
-  console.log(restaurantID);
   const reviewID = req.params.revId;
   knex('reviews')
   .where('reviews.id', reviewID)
@@ -202,7 +207,7 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
     } else {
       res.status(404).json({
         status: 'error',
-        message: 'That id does not exist'
+        message: 'That review id does not exist'
       });
     }
   })
@@ -259,7 +264,6 @@ router.post('/:id/review/new/submit', function (req, res, next) {
   })
   .returning('*')
   .then((results) => {
-    console.log(results);
     if (results.length) {
       knex('restaurants').where('id', restaurantID).update('avg_review', knex('reviews').avg('rating').where('restaurant_id', restaurantID)).then(() => {
         res.status(200);
