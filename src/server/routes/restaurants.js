@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const knex = require('../db/knex');
+const restaurantsControllers = require('../controllers/restaurants');
+const verifyUserExists = restaurantsControllers.verifyUserExists;
+
 
 router.get('/', function (req, res, next) {
   const restaurantID = req.params.id;
@@ -55,54 +58,69 @@ router.get('/:id', function (req, res, next) {
 router.get('/:id/reviews', function (req, res, next) {
 });
 
-router.get('/:id/edit', function (req, res, next) {
-  const restaurantID = req.params.id;
+router.get('/:id/edit', verifyUserExists, function (req, res, next) {
   var { renderObj } = req;
-  knex('restaurants')
-  .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type','restaurants.url', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
-  .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
-  .join('users', 'users.id', 'reviews.user_id')
-  .then((results) => {
-    renderObj.results = results;
-    renderObj.title = results[0].name;
-    res.render('restaurant_owner_edit', renderObj);
-  })
-  .catch((err) => {
+  const restaurantID = req.params.id;
+  var ownerID = renderObj.user.ownerID;
+  var adminRights = renderObj.user.admin;
+  if (restaurantID === ownerID || adminRights) {
+    knex('restaurants')
+    .where('restaurants.id', restaurantID)
+    .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type','restaurants.url', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
+    .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
+    .join('users', 'users.id', 'reviews.user_id')
+    .then((results) => {
+      renderObj.results = results;
+      renderObj.title = results[0].name;
+      res.render('restaurant_owner_edit', renderObj);
+    })
+    .catch((err) => {
+      res.redirect('/restaurants');
+    });
+  }else {
     res.redirect('/restaurants');
-  });
+  }
 });
 
-router.delete('/:id/delete', function (req, res, next) {
+router.delete('/:id/delete', verifyUserExists, function (req, res, next) {
   const restaurantID = parseInt(req.params.id);
-  knex('restaurants')
-  .del()
-  .where('id', restaurantID)
-  .returning('*')
-  .then((results) => {
-    if (results.length) {
-      res.status(200).json({
-        status: 'success',
-        message: `${results[0].title} is gone!`
-      });
-      res.redirect('/restaurants')
-    } else {
-      res.status(404).json({
+  var ownerID = renderObj.user.ownerID;
+  var adminRights = renderObj.user.admin;
+
+  if (restaurantID === ownerID || adminRights) {
+    knex('restaurants')
+    .del()
+    .where('id', restaurantID)
+    .returning('*')
+    .then((results) => {
+      if (results.length) {
+        res.status(200).json({
+          status: 'success',
+          message: `${results[0].title} is gone!`
+        });
+        res.redirect('/restaurants')
+      } else {
+        res.status(404).json({
+          status: 'errror',
+          message: 'That id does not exist'
+        });
+        res.redirect('/restaurants')
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({
         status: 'errror',
-        message: 'That id does not exist'
+        message: 'Something bad happened!'
       });
       res.redirect('/restaurants')
-    }
-  })
-  .catch((err) => {
-    res.status(500).json({
-      status: 'errror',
-      message: 'Something bad happened!'
     });
+  }
+  else {
     res.redirect('/restaurants')
-  });
+  }
 });
 router.put('/:id/edit', (req, res, next) => {
+  var { renderObj } = req;
   const id = parseInt(req.params.id);
   const updatedrestaurantName = req.body.name;
   const updatedRestaurantIMG = req.body.url;
@@ -164,7 +182,7 @@ router.get('/:id/review/:revId/edit', function (req, res, next) {
 });
 
 router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
-  let renderObj = {};
+  var { renderObj } = req;
   let restaurantID = req.params.id;
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
@@ -196,15 +214,30 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   });
 });
 
-router.get('/:id/reviews/new', function (req, res, next) {
-  var { renderObj } = req;
-  let restaurantID = req.params.id;
-  renderObj.restaurantID = restaurantID;
-  res.render('review_new', renderObj);
+router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
+  var ownerID = renderObj.user.ownerID;
+  var adminRights = renderObj.user.admin;
+  if (ownerID === null ) {
+    var { renderObj } = req;
+    let restaurantID = req.params.id;
+    renderObj.restaurantID = restaurantID;
+    res.render('review_new', renderObj);
+  }
+  else if (adminRights) {
+    var { renderObj } = req;
+    let restaurantID = req.params.id;
+    renderObj.restaurantID = restaurantID;
+    res.render('review_new', renderObj);
+  }
+  else {
+    res.redirect('/login')
+  }
+
+
 });
 
 router.post('/:id/review/new/submit', function (req, res, next) {
-  let renderObj = {};
+  var { renderObj } = req;
   let restaurantID = req.params.id;
   let review = req.body.review;
   let rating = req.body.rating;
@@ -236,6 +269,7 @@ router.post('/:id/review/new/submit', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
+  var { renderObj } = req;
   var type = req.body.type;
   var name = req.body.name;
   var streetAddress = req.body.streetAddress;
