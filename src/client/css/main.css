@@ -1,7 +1,6 @@
 body {
-  margin-top: 50px;
+  margin: 0 auto;
   padding: 0 auto;
-  margin-top: 50px;
 }
 
 .navbar-custom,
@@ -15,7 +14,21 @@ body {
   color: #F7901E;
 }
 
+.restaurants,
+.single-rest {
+  margin-top: 75px;
+}
+
+.add-rest {
+  margin: 0 35px 15px 0;
+}
+
+#pagination {
+  clear: both;
+}
+
 .footer-custom {
+  margin-top: 25px;
   padding-top: 1.8vh;
   color: #F7901E;
 }

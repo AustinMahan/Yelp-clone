@@ -20,13 +20,26 @@ router.get('/page/:id', function (req, res, next) {
   .then((restaurants) => {
     var more = false;
     var pages = parseInt(restaurants.length / 9);
-    if (pages > pageNum) {
-      more = true;
+    var pageArr = [];
+
+    for (var i = 0; i <= pages; i++) {
+      pageArr.push(i + 1);
     }
+
     renderObj.title = `Restaurants pg. (${pageNum})`;
-    renderObj.more = more;
     renderObj.nextPage = pageNum + 1;
+    renderObj.prevPage = pageNum - 1;
+    renderObj.allPages = pageArr;
     renderObj.restaurants = restaurants.slice((9 * pageNum), (9 * (pageNum + 1)));
+
+    if (pageNum === 0) {
+      renderObj.next = true;
+    } else if (pageNum < pages) {
+      renderObj.next = true;
+      renderObj.prev = true;
+    } else {
+      renderObj.prev = true;
+    }
     res.render('restaurants', renderObj);
   });
 });
@@ -45,7 +58,7 @@ router.get('/:id', function (req, res, next) {
   // .join('reviews', 'reviews.restaurant_id', 'restaurant_id')
   // .join('users', 'user_id', 'reviews.user_id')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'reviews.id AS review_id')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'restaurants.url')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
@@ -165,7 +178,6 @@ router.put('/:id/edit', (req, res, next) => {
   });
 });
 
-
 router.get('/:id/review/:revId/edit', function (req, res, next) {
   var { renderObj } = req;
   const restaurantID = req.params.id;
@@ -196,7 +208,7 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   knex('reviews')
   .update({
     rating: updatedRating,
-    review: updatedReview,
+    review: updatedReview
   })
   .where('id', reviewID)
   .returning('*')

@@ -8,13 +8,13 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container single-rest">
   <div class="row">
     <div class="col-md-6">
       {% if results[0] %}
         <h1>{{results[0].name}}</h1>
       {% endif %}
-        <img src={{results[0].url}} alt="restaurant image" width="500"/>
+        <img src="{{results[0].url}}" alt="restaurant image" width="500"/>
         {% if results[0] %}
           <h1>{{results[0].location}}</h1>
         {% endif %}
