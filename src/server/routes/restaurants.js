@@ -55,17 +55,19 @@ router.get('/:id', function (req, res, next) {
   var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'restaurants.url', 'reviews.id AS review_id')
-  .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
-  .join('users', 'users.id', 'reviews.user_id')
-  .then((results) => {
-    console.log(results);
-    renderObj.results = results;
-    renderObj.title = results[0].name;
-    renderObj.restaurantID = restaurantID;
-    res.render('restaurant', renderObj);
+  .then((restraurant) => {
+    renderObj.restraurant = restraurant[0];
+    return knex('reviews').where('restaurant_id', restaurantID)
+      .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
+        console.log(reviews);
+        renderObj.reviews = reviews
+        // renderObj.title = results[0].name;
+        renderObj.restaurantID = restaurantID;
+        res.render('restaurant', renderObj);
+      })
   })
   .catch((err) => {
+    console.log(err);
     res.redirect('/restaurants');
   });
 });
