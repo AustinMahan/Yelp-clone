@@ -14,10 +14,10 @@
     <div class="row container-fluid">
       {% for restaurant in restaurants %}
       <figure class="figure col-md-4">
-        <img src="./media/table-top.jpeg" class="col-xs-12">
-        <h4 class="col-md-12"><a href="/restaurants/{{restaurant.id}}">{{ restaurant.name }}</a></h4>
-        <h5 class="col-md-12">{{ restaurant.location }}</h5>
-        <figcaption class="col-md-12 figure-caption">{{ restaurant.description }}</figcaption>
+        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" class="col-xs-12"></a>
+        <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{ restaurant.name }}</a></h4>
+        <h5 class="col-xs-12">{{ restaurant.location }}</h5>
+        <figcaption class="col-xs-12 figure-caption text-justify">{{ restaurant.description }}</figcaption>
       </figure>
       {% endfor %}
     </div>
