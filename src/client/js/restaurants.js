@@ -51,7 +51,6 @@ console.log("restaurants.js sanity check");
 
 function selectRadioButton() {
   var rating = $( ".rating_radio" ).attr('data-id');
-  console.log(rating);
   if (rating >= 0 && rating < 1) {
     $('#inlineRadio1').attr('checked', true);
   }

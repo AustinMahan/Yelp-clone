@@ -76,8 +76,9 @@
             <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
           </div>
         </div>
-
-        {% include "user_review_button.html" %}
+        {% if req.session.user.id === user.id %}
+          {% include "user_review_button.html" %}
+        {% endif %}
 
         <hr>
       {% endfor %}
