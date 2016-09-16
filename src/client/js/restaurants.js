@@ -46,8 +46,7 @@ function fillStars(starsDivID) {
 }
 
 function selectRadioButton() {
-  var rating = $('.rating_radio').attr('data-id');
-  console.log(rating);
+  var rating = $( ".rating_radio" ).attr('data-id');
   if (rating >= 0 && rating < 1) {
     $('#inlineRadio1').attr('checked', true);
   } else if (rating >= 1 && rating < 2) {

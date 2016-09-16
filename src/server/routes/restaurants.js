@@ -52,6 +52,7 @@ router.get('/new', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   // console.log(req.session.user);
   const restaurantID = req.params.id;
+  console.log(req.session.us);
   var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
