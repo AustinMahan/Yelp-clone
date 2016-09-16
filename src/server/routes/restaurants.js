@@ -58,11 +58,11 @@ router.get('/:id', function (req, res, next) {
   .where('restaurants.id', restaurantID)
   .then((restraurant) => {
     renderObj.restraurant = restraurant[0];
+    renderObj.title = restraurant[0].name;
     return knex('reviews').where('restaurant_id', restaurantID)
       .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
         console.log(reviews);
         renderObj.reviews = reviews
-        // renderObj.title = results[0].name;
         renderObj.restaurantID = restaurantID;
         res.render('restaurant', renderObj);
       })
