@@ -38,7 +38,7 @@ router.get('/:id', function (req, res, next) {
   var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'reviews.id')
+  .select('*')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
@@ -60,7 +60,7 @@ router.get('/:id/edit', function (req, res, next) {
   var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type','restaurants.url', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
@@ -100,6 +100,44 @@ router.delete('/:id/delete', function (req, res, next) {
       message: 'Something bad happened!'
     });
     res.redirect('/restaurants')
+  });
+});
+router.put('/:id/edit', (req, res, next) => {
+  const id = parseInt(req.params.id);
+  const updatedrestaurantName = req.body.name;
+  const updatedRestaurantIMG = req.body.url;
+  const updatedLocation = req.body.location;
+  const updatedCuisineType = req.body.type;
+  const updatedRestaurantDescription = req.body.description;
+
+  knex('restaurants')
+  .update({
+    name: updatedrestaurantName,
+    url: updatedRestaurantIMG,
+    location: updatedLocation,
+    type: updatedCuisineType,
+    description: updatedRestaurantDescription
+  })
+  .where('id', id)
+  .returning('*')
+  .then((results) => {
+    if (results.length) {
+      res.status(200).json({
+        status: 'success',
+        message: `${results[0].name} has been updated!`
+      });
+    } else {
+      res.status(404).json({
+        status: 'errror',
+        message: 'That id does not exist'
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'errror',
+      message: 'Something bad happened!'
+    });
   });
 });
 
