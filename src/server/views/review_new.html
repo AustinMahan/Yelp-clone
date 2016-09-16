@@ -15,25 +15,25 @@
 
       <h2>Editing Review for {{results.name}}</h2>
 
-      <h4>Posting as: {{results.first_name}} {{results.first_name}}</h4>
+      <h4>Posting as: {{user.first_name}} {{user.last_name}}</h4>
 
     <form method="POST" action="/restaurants/{{restaurantID}}/review/new/submit">
     <div class='rating_radio' data-id='{{results.rating}}'>
 
       <label class="radio-inline">
-        <input type="radio" name="rating_new" id="inlineRadio1" value="1"> 1
+        <input type="radio" name="rating" id="inlineRadio1" value="1"> 1
       </label>
       <label class="radio-inline">
-        <input type="radio" name="rating_new" id="inlineRadio2" value="2"> 2
+        <input type="radio" name="rating" id="inlineRadio2" value="2"> 2
       </label>
       <label class="radio-inline">
-        <input type="radio" name="rating_new" id="inlineRadio3" value="3"> 3
+        <input type="radio" name="rating" id="inlineRadio3" value="3"> 3
       </label>
       <label class="radio-inline">
-        <input type="radio" name="rating_new" id="inlineRadio4" value="4"> 4
+        <input type="radio" name="rating" id="inlineRadio4" value="4"> 4
       </label>
       <label class="radio-inline">
-        <input type="radio" name="rating_new" id="inlineRadio5" value="5"> 5
+        <input type="radio" name="rating" id="inlineRadio5" value="5"> 5
       </label>
   </div>
 
