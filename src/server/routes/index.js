@@ -5,14 +5,14 @@ const knex = require('../db/knex');
 const indexController = require('../controllers/index');
 
 router.get('/', (req, res, next) => {
-  var { renderObject } = req;
-  renderObject.title = 'gRestaurants';
+  var { renderObj } = req;
+  renderObj.title = 'gRestaurants';
   knex('restaurants').select()
   .orderBy('avg_review', 'desc')
   .limit(3)
   .then((results) => {
-    renderObject.restaurants = results;
-    res.render('index', renderObject);
+    renderObj.restaurants = results;
+    res.render('index', renderObj);
   })
   .catch((err) => {
     return next(err);
