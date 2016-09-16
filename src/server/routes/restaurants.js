@@ -55,7 +55,7 @@ router.get('/:id', function (req, res, next) {
   var { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'restaurants.url')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'restaurants.url', 'reviews.id AS review_id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
@@ -211,8 +211,10 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   .returning('*')
   .then((results) => {
     if (results.length) {
-      res.status(200);
-      res.redirect(`/restaurants/${restaurantID}`);
+      knex('restaurants').where('id', restaurantID).update('avg_review', knex('reviews').avg('rating').where('restaurant_id', restaurantID)).then(() => {
+        res.status(200);
+        res.redirect(`/restaurants/${restaurantID}`);
+      });
     } else {
       res.status(404).json({
         status: 'error',
