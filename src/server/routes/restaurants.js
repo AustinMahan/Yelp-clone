@@ -37,13 +37,10 @@ router.get('/new', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
+  // console.log(req.session.user);
   const restaurantID = req.params.id;
   var { renderObj } = req;
   knex('restaurants')
-  // .where('restaurants.id', restaurantID)
-  // .select('restaurants.id AS restaurant_uid', 'users.id AS user_id', '*')
-  // .join('reviews', 'reviews.restaurant_id', 'restaurant_id')
-  // .join('users', 'user_id', 'reviews.user_id')
   .where('restaurants.id', restaurantID)
   .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'reviews.id AS review_id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
@@ -200,6 +197,35 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   })
   .where('id', reviewID)
   .returning('*')
+  .then((results) => {
+    if (results.length) {
+      res.status(200);
+      res.redirect(`/restaurants/${restaurantID}`);
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'That review id does not exist'
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'error',
+      message: 'Updated Failed'
+    });
+  });
+});
+
+router.delete('/:id/review/:revId/delete', function (req, res, next) {
+  var { renderObj } = req;
+  let restaurantID = req.params.id;
+  let reviewID = req.params.revId;
+  let updatedReview = req.body.review;
+  let updatedRating = req.body.rating;
+  console.log(req.body);
+  knex('reviews')
+  .where('id', reviewID)
+  .del()
   .then((results) => {
     if (results.length) {
       res.status(200);
