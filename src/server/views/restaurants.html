@@ -8,38 +8,37 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     {% for restaurant in restaurants %}
     {% if loop.index % 3 == 0 %}
     <div class="row">
     {% endif %}
     <div class="col-md-4">
-        <h1>{{restaurant.name}}</h1>
-        <img src="{{restaurant.url}}" alt="restaurant image" width="250"/>
-        <h4>{{restaurant.location}}</h4>
-        <h5>
-          <div class="starsDiv" id="{{restaurant.id}}review">
+        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" alt="restaurant image" class="col-xs-12"></a>
+        <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{restaurant.name}}</h4></a>
+        <h5 class="col-xs-12">{{ restaurant.location }}</h5>
+          <div class="starsDiv col-xs-12" id="{{restaurant.id}}review">
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <p id="starRating" class = "starRating">
-              {{restaurant.avg_review}}
+              {{ restaurant.avg_review }}
             </p>
           </div>
-        <p>
-          {{restaurant.description}}
+        <p class="col-xs-12 text-justify">
+          {{ restaurant.description }}
         </p>
-        <h4><strong>Cuisine Type:{{restaurant.type}}</strong></h4>
+        <h6 class="col-xs-12"><strong>Cuisine Type: {{ restaurant.type }}</strong></h6>
     </div>
     {% if loop.index % 3 == 0 %}
     </div>
     {% endif %}
     {% endfor %}
     {% if more %}
-    <a href="/restaurants/page/{{nextPage}}" style="margin-left: 49%;">Next</a>
+    <a href="/restaurants/page/{{ nextPage }}" style="margin-left: 49%;">Next</a>
     {% endif %}
 
   </div>

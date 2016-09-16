@@ -17,6 +17,12 @@
       keys: [process.env.SECRET_KEY1, process.env.SECRET_KEY2]
     }));
 
+    app.use(function(req, res, next) {
+      req.renderObj = {};
+      req.renderObj.user = req.session.user;
+      next();
+    });
+
     app.use('/', routes);
     app.use('/restaurants', restaurants);
     app.use('/login', login);
