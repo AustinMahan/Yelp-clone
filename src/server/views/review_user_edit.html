@@ -15,11 +15,11 @@
 
       <h2>Editing Review for {{results.name}}</h2>
 
-          <!-- {% include "owner_edit.html" %} -->
       <h4>Posting as: {{results.first_name}} {{results.first_name}}</h4>
 
-    <form method="POST" action="/restaurants/{{restaurantID}}/review/{{reviewID}}/edit/submit">
+    <form method="POST" action='/restaurants/{{restaurantID}}/review/{{result.id}}/edit/submit'>
     <div class='rating_radio' data-id='{{results.rating}}'>
+
       <label class="radio-inline">
         <input type="radio" name="rating" id="inlineRadio1" value="1"> 1
       </label>
