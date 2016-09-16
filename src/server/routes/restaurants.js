@@ -57,12 +57,13 @@ router.get('/:id', function (req, res, next) {
   const renderObj = {};
   knex('restaurants')
   .where('restaurants.id', restaurantID)
-  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id')
+  .select('restaurants.name', 'restaurants.location', 'restaurants.description', 'restaurants.type', 'users.username', 'users.first_name', 'users.last_name', 'reviews.rating', 'restaurants.avg_review', 'reviews.review', 'reviews.created_at','reviews.user_id','reviews.restaurant_id', 'reviews.id')
   .join('reviews', 'reviews.restaurant_id', 'restaurants.id')
   .join('users', 'users.id', 'reviews.user_id')
   .then((results) => {
     renderObj.results = results;
     renderObj.title = results[0].name;
+    renderObj.restaurantID = restaurantID;
     res.render('restaurant', renderObj);
   })
   .catch((err) => {
@@ -149,7 +150,6 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
   let updatedRating = req.body.rating;
-  console.log(req.body);
   knex('reviews')
   .update({
     rating: updatedRating,
@@ -178,8 +178,42 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', function (req, res, next) {
-  const renderObj = {};
+  let renderObj = {};
+  let restaurantID = req.params.id;
+  renderObj.restaurantID = restaurantID;
+  res.render('review_new', renderObj);
+});
 
+router.post('/:id/review/new/submit', function (req, res, next) {
+  let renderObj = {};
+  let restaurantID = req.params.id;
+  let review = req.body.review;
+  let rating = req.body.rating;
+  console.log(req.body);
+  knex('reviews')
+  .insert({
+    rating: rating,
+    review: review
+  })
+  .returning('*')
+  .then((results) => {
+    console.log(results);
+    if (results.length) {
+      res.status(200);
+      res.redirect(`/restaurants/${restaurantID}`);
+    } else {
+      res.status(404).json({
+        status: 'error',
+        message: 'Error posting review'
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      status: 'error',
+      message: 'Review post Failed'
+    });
+  });
 });
 
 router.post('/new', function (req, res, next) {

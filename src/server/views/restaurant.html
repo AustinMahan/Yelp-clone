@@ -14,37 +14,39 @@
       {% if results[0] %}
         <h1>{{results[0].name}}</h1>
       {% endif %}
-        <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
-        {% if results[0] %}
-          <h1>{{results[0].location}}</h1>
-        {% endif %}
-        <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <p id="starRating" class = "starRating">
-            {{results[0].avg_review}}
-          </p>
-        </div>
+      <img src="https://static.pexels.com/photos/5938/food-salad-healthy-lunch-large.jpg" alt="restaurant image" width="500"/>
+      {% if results[0] %}
+        <h1>{{results[0].location}}</h1>
+      {% endif %}
+      <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+        <p id="starRating" class = "starRating">
+          {{results[0].avg_review}}
+        </p>
+      </div>
 
-        {% if results[0] %}
+      {% if results[0] %}
         <p>
           {{results[0].description}}
         </p>
-        {% endif %}
+      {% endif %}
 
         <h4><strong>Cuisine Type:</strong></h4>
         {% if results[0] %}
-        <h5>
-          {{results[0].type}}
-        </h5>
+          <h5>
+            {{results[0].type}}
+          </h5>
         {% endif %}
     </div>
-    <div class="col-md-6">
 
-      <h2><strong>{{ results[0] | length }} Reviews</strong></h2>
+    <div class="col-md-6">
+      <h2>
+        <strong>{{ results[0] | length }} Reviews</strong>
+      </h2>
       <div class="well reviews-well">
         {% for result in results %}
           <div class="row">
@@ -54,7 +56,6 @@
           </div>
         <div class="row">
           <div class="col-md-4">
-            <!-- <button type="button" class="btn btn-default btn-lg"> -->
             <h5>
               <div class="starsDiv" id="{{result.user_id}}review">
                 <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
@@ -66,16 +67,18 @@
                   {{result.rating}}
                 </p>
               </div>
-            <!-- </button> -->
-          </h5>
+            </h5>
           </div>
           <div class="col-md-4 col-md-4-offset-4">
-            <h5>{{result[0].created_at}}</h5>
+            <h5>{{result.created_at}}</h5>
           </div>
           <div class="col-md-4 col-md-4-offset-8">
             <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
           </div>
         </div>
+
+        {% include "user_review_button.html" %}
+
         <hr>
       {% endfor %}
       </div>
