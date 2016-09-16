@@ -216,18 +216,17 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
   });
 });
 
-router.delete('/:id/review/:revId/delete', function (req, res, next) {
-  var { renderObj } = req;
+router.get('/:id/review/:revId/delete', function (req, res, next) {
   let restaurantID = req.params.id;
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
   let updatedRating = req.body.rating;
-  console.log(req.body);
+  console.log('delete w');
   knex('reviews')
   .where('id', reviewID)
   .del()
   .then((results) => {
-    if (results.length) {
+    if (!results.length) {
       res.status(200);
       res.redirect(`/restaurants/${restaurantID}`);
     } else {
@@ -240,7 +239,7 @@ router.delete('/:id/review/:revId/delete', function (req, res, next) {
   .catch((err) => {
     res.status(500).json({
       status: 'error',
-      message: 'Updated Failed'
+      message: 'Delete Failed'
     });
   });
 });
