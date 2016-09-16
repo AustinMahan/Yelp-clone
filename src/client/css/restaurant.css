@@ -1,3 +1,6 @@
+.restaurantContainer{
+  padding: 20px;
+}
 .reviews-well{
   overflow-y: scroll;
   height: 400px;
