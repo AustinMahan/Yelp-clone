@@ -232,9 +232,10 @@ router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
-  var ownerID = renderObj.user.ownerID;
+  var { renderObj } = req;
+  var ownerID = renderObj.user.owner_id;
   var adminRights = renderObj.user.admin;
-  if (ownerID === null ) {
+  if (ownerID === null) {
     let restaurantID = req.params.id;
     knex('restaurants')
     .where('restaurants.id', restaurantID)
