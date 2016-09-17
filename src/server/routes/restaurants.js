@@ -65,8 +65,10 @@ router.get('/:id', function (req, res, next) {
     .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
       renderObj.reviews = reviews
       renderObj.restaurantID = restaurantID;
-      console.log(renderObj.user);
-      res.render('restaurant', renderObj);
+      knex('reviews').avg('rating').where('restaurant_id', restaurantID).then((data) => {
+        renderObj.restraurant.avg_review = data[0].avg
+        res.render('restaurant', renderObj);
+      })
 
       // check if user wrote review
       if (renderObj.user) {
