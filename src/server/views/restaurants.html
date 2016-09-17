@@ -9,9 +9,12 @@
 {% block content %}
 
 <div class="container restaurants">
+  {% if user %}
   <div class="row text-right">
     <a href="/restaurants/new" class="btn btn-primary add-rest">Add New Restaurant</a>
   </div>
+  {% endif %}
+  
   {% for restaurant in restaurants %}
   {% if loop.index % 3 == 0 %}
   <div class="row">
