@@ -14,15 +14,13 @@
         <h1>{{restraurant.name}}</h1>
         <img src="{{restraurant.url}}" alt="restaurant image" width="500"/>
           <h1>{{restraurant.location}}</h1>
-        <div class="starsDiv" id="{{results[0].restaurant_id}}restaurant">
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <p id="starRating" class = "starRating">
-            {{restraurant.avg_review}}
-          </p>
+        <div class="number0" id="{{results[0].restaurant_id}}restaurant">
+          <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
+          <span id="starRating" style="display:none;">{{restraurant.avg_review}}</span>
         </div>
 
         <p>
@@ -54,15 +52,13 @@
         <div class="row">
           <div class="col-md-4">
             <h5>
-              <div class="starsDiv" id="{{result.user_id}}review">
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-                <p id="starRating" class = "starRating">
-                  {{result.rating}}
-                </p>
+              <span style="display:none;" class="rating">{{result.rating}}</span>
+              <div class="number{{loop.index}}" id="{{result.user_id}}review">
+                <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
               </div>
           </h5>
           </div>
