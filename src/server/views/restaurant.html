@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="/css/restaurant.css">
+  <link rel="stylesheet" href="/css/restaurant.css" title=""e="restaurant">
 {% endblock %}
 
 {% block content %}
@@ -37,6 +37,13 @@
     <div class="col-md-6">
 
       <h2><strong>{{ reviews | length }} Reviews</strong></h2>
+
+      {% if reviewWritten != true or reviewWritten != 'undefined' %}
+      <p>
+        <a href="/restaurants/{{restraurant.id}}/reviews/new">Write a new review</a>
+      </p>
+      {% endif %}
+
       <div class="well reviews-well">
         {% for result in reviews %}
           <div class="row">
@@ -68,7 +75,8 @@
             <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
           </div>
         </div>
-        {% if req.session.user.id === user.id %}
+
+        {% if result.user_id === user.id %}
           {% include "user_review_button.html" %}
         {% endif %}
 

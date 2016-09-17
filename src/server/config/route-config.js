@@ -8,6 +8,7 @@
     const routes = require('../routes/index');
     const restaurants = require('../routes/restaurants');
     const login = require('../routes/login');
+    const logout = require('../routes/logout');
     const signup = require('../routes/signup');
     const cookieSession = require('cookie-session');
     const knex = require('../db/knex')
@@ -25,7 +26,7 @@
           if (data.length > 0) {
             req.renderObj.user = data[0];
           }else {
-            req.renderObj.user = undefined;
+            req.renderObj.user = 'null';
           }
           next();
         });
@@ -37,6 +38,7 @@
     app.use('/', routes);
     app.use('/restaurants', restaurants);
     app.use('/login', login);
+    app.use('/logout', logout);
     app.use('/signup', signup);
 
   };
