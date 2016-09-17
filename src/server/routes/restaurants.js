@@ -73,7 +73,7 @@ router.get('/:id', function (req, res, next) {
       .then((loggedin) => {
         renderObj.reviewWritten = true;
         console.log(renderObj.reviewWritten);
-      })
+      });
     })
   })
   .catch((err) => {
