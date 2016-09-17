@@ -41,10 +41,12 @@
 
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" rows="3" name="review" id="book-update-description">{{results.review}}</textarea>
+            <textarea class="form-control test" rows="12" name="review" id="book-update-description">{{results.review}}</textarea>
           </div>
           <br>
-          <button type="submit_review" class="btn btn-lrg review_submit">Submit New Review</button>
+          <div class="text-left">
+            <a href="/restaurants/{{restraurant.id}}/reviews/new" class="btn btn-primary add-rest"><span class='glyphicon glyphicon-plus'></span> Add New Review</a>
+          </div>
         </form>
         <br>
 

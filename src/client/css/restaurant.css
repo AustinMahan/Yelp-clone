@@ -33,5 +33,6 @@
 }
 
 .test{
-  display: inline;;
+  max-width: 650px;
+  font-size: 20px;
 }
