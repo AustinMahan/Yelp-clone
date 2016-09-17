@@ -293,7 +293,6 @@ router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
     let restaurantID = req.params.id;
     knex('restaurants')
     .where('restaurants.id', restaurantID)
-    .select('restaurants.name')
     .then((results) => {
       renderObj.results = results[0];
       renderObj.restaurantID = restaurantID;
