@@ -65,15 +65,18 @@ router.get('/:id', function (req, res, next) {
     .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
       renderObj.reviews = reviews
       renderObj.restaurantID = restaurantID;
+      console.log(renderObj.user);
       res.render('restaurant', renderObj);
 
       // check if user wrote review
-      knex('reviews')
-      .where('user_id', renderObj.user.id)
-      .then((loggedin) => {
-        renderObj.reviewWritten = true;
-        console.log(renderObj.reviewWritten);
-      });
+      if (renderObj.user) {
+        knex('reviews')
+        .where('user_id', renderObj.user.id)
+        .then((loggedin) => {
+          renderObj.reviewWritten = true;
+          console.log(renderObj.reviewWritten);
+        });
+      }
     })
   })
   .catch((err) => {

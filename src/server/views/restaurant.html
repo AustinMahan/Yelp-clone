@@ -76,7 +76,9 @@
           </div>
         </div>
 
-        {% if result.user_id === user.id %}
+        {% if user.admin %}
+          {% include "user_review_button.html" %}
+        {% elif result.user_id === user.id %}
           {% include "user_review_button.html" %}
         {% endif %}
 
