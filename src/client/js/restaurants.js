@@ -42,6 +42,8 @@ function fillStars(starsDivID) {
     thirdStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
     fourthStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
     fifthStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
+  } else {
+    firstStar.toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star');
   }
 }
 
