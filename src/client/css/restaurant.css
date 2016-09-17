@@ -3,9 +3,13 @@
 }
 .reviews-well{
   overflow-y: scroll;
-  height: 400px;
+  height: 550px;
 }
 
 .starRating{
   display: none;
+}
+
+#edit_delete{
+  display: inline-block;;
 }

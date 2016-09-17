@@ -57,15 +57,24 @@ router.get('/:id', function (req, res, next) {
   knex('restaurants')
   .where('restaurants.id', restaurantID)
   .then((restraurant) => {
+    renderObj.title = restraurant[0].name;
     renderObj.restraurant = restraurant[0];
-    return knex('reviews').where('restaurant_id', restaurantID)
-      .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
-        console.log(reviews);
-        renderObj.reviews = reviews
-        // renderObj.title = results[0].name;
-        renderObj.restaurantID = restaurantID;
-        res.render('restaurant', renderObj);
+    return knex('reviews')
+    .where('restaurant_id', restaurantID)
+    .select('reviews.id AS review_id', '*')
+    .join('users', 'users.id', 'reviews.user_id').then((reviews) => {
+      renderObj.reviews = reviews
+      renderObj.restaurantID = restaurantID;
+      res.render('restaurant', renderObj);
+
+      // check if user wrote review
+      knex('reviews')
+      .where('user_id', renderObj.user.id)
+      .then((loggedin) => {
+        renderObj.reviewWritten = true;
+        console.log(renderObj.reviewWritten);
       })
+    })
   })
   .catch((err) => {
     console.log(err);
@@ -271,6 +280,7 @@ router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
     .where('restaurants.id', restaurantID)
     .select('restaurants.name')
     .then((results) => {
+      renderObj.title = results[0].name + " New Review";
       renderObj.results = results[0];
       renderObj.restaurantID = restaurantID;
     res.render('review_new', renderObj);
