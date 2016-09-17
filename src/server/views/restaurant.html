@@ -35,23 +35,24 @@
         </h5>
     </div>
     <div class="col-md-6">
+      <div class='row'>
+        <h2 class='text-left'><strong>{{ reviews | length }} Reviews</strong></h2>
 
-      <h2><strong>{{ reviews | length }} Reviews</strong></h2>
-
-      {% if reviewWritten != true or reviewWritten != 'undefined' %}
-      <div class="row text-right">
-        <a href="/restaurants/{{restraurant.id}}/reviews/new" class="btn btn-primary add-rest">Add New Review</a>
+        {% if reviewWritten != true or reviewWritten != 'undefined' %}
+        <div class="text-right">
+          <a href="/restaurants/{{restraurant.id}}/reviews/new" class="btn btn-primary add-rest"><span class='glyphicon glyphicon-plus'></span> Add New Review</a>
+        </div>
+        {% endif %}
       </div>
-      {% endif %}
-
-      <div class="well reviews-well">
+      <div class="well reviews-well review-border">
         {% for result in reviews %}
+        <div class='review-border inside'>
           <div class="row">
-            <p>
+            <p class='review-text'>
               {{result.review}}
             </p>
           </div>
-        <div class="row">
+          <div class="row">
           <div class="col-md-4">
             <h5>
               <div class="starsDiv" id="{{result.user_id}}review">
@@ -79,8 +80,7 @@
         {% elif result.user_id === user.id %}
           {% include "user_review_button.html" %}
         {% endif %}
-
-        <hr class ='hr-bold'>
+      </div>
       {% endfor %}
       </div>
     </div>
