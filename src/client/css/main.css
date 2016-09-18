@@ -1,6 +1,6 @@
 body {
   margin: 0 auto;
-  padding: 0 auto;
+  padding: 70px 0 0;
 }
 
 .navbar-custom,
@@ -14,17 +14,21 @@ body {
   color: #F7901E;
 }
 
-.restaurants,
-.single-rest {
-  margin-top: 75px;
-}
-
 .add-rest {
-  margin: 0 35px 15px 0;
+  margin: 0 45px 15px 0;
 }
 
 #pagination {
   clear: both;
+  margin-top: 25px;
+}
+
+h4 a {
+  color: #404040;
+}
+
+h4 a:hover {
+  color: #F7901E;
 }
 
 .footer-custom {
@@ -34,17 +38,42 @@ body {
 }
 
 .main-img {
+  margin-top: -50px;
   width: 100%;
   position: relative;
 }
 
+.feat-img {
+  height: 250px;
+  width: 415px;
+}
+
+.rest-img {
+  height: 215px;
+  width: 350px;
+}
+
+.rest-descript {
+  height: 100px;
+  overflow: hidden;
+}
+
 .welcome-tag {
-   position: absolute;
-   padding: 5px;
-   top: 22vh;
-   left: 1.5vw;
-   background: rgba(0, 0, 0, 0.5);
-   color: #fff;
-   font-size: 5vw;
-   font: Helvetica, Sans-Serif;
+  position: absolute;
+  padding: 5px;
+  top: 22vh;
+  left: 1.5vw;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 5vw;
+  font: Helvetica, Sans-Serif;
+}
+
+.test {
+  resize: none;
+}
+
+.search-form,
+.btn {
+  border-radius: 0;
 }

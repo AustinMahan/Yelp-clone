@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/page/:id', function (req, res, next) {
   const pageNum = parseInt(req.params.id);
-  var { renderObj } = req;
+  const { renderObj } = req;
 
   knex('restaurants')
   .select('*')
@@ -26,7 +26,7 @@ router.get('/page/:id', function (req, res, next) {
       pageArr.push(i + 1);
     }
 
-    renderObj.title = `Restaurants pg. (${pageNum})`;
+    renderObj.title = `gRestaurants Page: ${pageNum +1}`;
     renderObj.nextPage = pageNum + 1;
     renderObj.prevPage = pageNum - 1;
     renderObj.allPages = pageArr;
@@ -45,7 +45,7 @@ router.get('/page/:id', function (req, res, next) {
 });
 
 router.get('/new', function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   res.render('newRest', {});
 });
 
@@ -53,7 +53,7 @@ router.get('/:id', function (req, res, next) {
   // console.log(req.session.user);
   const restaurantID = req.params.id;
   console.log(req.session.us);
-  var { renderObj } = req;
+  const { renderObj } = req;
   knex('restaurants')
   .where('restaurants.id', restaurantID)
   .then((restraurant) => {
@@ -92,7 +92,7 @@ router.get('/:id/reviews', function (req, res, next) {
 });
 
 router.get('/:id/edit', verifyUserExists, function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   const restaurantID = req.params.id;
   var ownerID = renderObj.user.ownerID;
   var adminRights = renderObj.user.admin;
@@ -152,8 +152,9 @@ router.delete('/:id/delete', verifyUserExists, function (req, res, next) {
     res.redirect('/restaurants')
   }
 });
+
 router.put('/:id/edit', (req, res, next) => {
-  var { renderObj } = req;
+  const { renderObj } = req;
   const id = parseInt(req.params.id);
   const updatedrestaurantName = req.body.name;
   const updatedRestaurantIMG = req.body.url;
@@ -193,7 +194,7 @@ router.put('/:id/edit', (req, res, next) => {
 });
 
 router.get('/:id/review/:revId/edit', function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   const restaurantID = req.params.id;
   const reviewID = req.params.revId;
   knex('reviews')
@@ -213,7 +214,7 @@ router.get('/:id/review/:revId/edit', function (req, res, next) {
 });
 
 router.post('/:id/review/:revId/edit/submit', function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   let restaurantID = req.params.id;
   let reviewID = req.params.revId;
   let updatedReview = req.body.review;
@@ -276,7 +277,7 @@ router.get('/:id/review/:revId/delete', function (req, res, next) {
 });
 
 router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   var ownerID = renderObj.user.owner_id;
   var adminRights = renderObj.user.admin;
   if (ownerID === null) {
@@ -302,12 +303,12 @@ router.get('/:id/reviews/new', verifyUserExists, function (req, res, next) {
     });
   }
   else {
-    res.redirect('/restaurants');
+    res.redirect(`/restaurants/${restaurantID}`);
   }
 });
 
 router.post('/:id/review/new/submit', function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   let restaurantID = req.params.id;
   let review = req.body.review;
   let rating = req.body.rating;
@@ -342,7 +343,7 @@ router.post('/:id/review/new/submit', function (req, res, next) {
 });
 
 router.post('/new', function (req, res, next) {
-  var { renderObj } = req;
+  const { renderObj } = req;
   var type = req.body.type;
   var name = req.body.name;
   var streetAddress = req.body.streetAddress;
@@ -383,10 +384,10 @@ router.post('/new', function (req, res, next) {
 
 router.post('/search', function(req, res, next) {
   var searchName = req.body.search.toLowerCase();
-  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `%${searchName}%`)).then(function(data) {
+  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `${searchName}`)).then(function(data) {
     if (data.length > 0) {
       res.redirect(`/restaurants/${data[0].id}`);
-    }else {
+    } else {
       res.redirect('/restaurants');
     }
   });

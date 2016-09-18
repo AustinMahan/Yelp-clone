@@ -1,4 +1,5 @@
 {% extends "_base.html" %}
+
 {% block title %}
 {% endblock %}
 
@@ -11,31 +12,27 @@
 <div class="container restaurants">
   {% if user %}
   <div class="row text-right">
-    <a href="/restaurants/new" class="btn btn-primary add-rest">Add New Restaurant</a>
+    <a href="/restaurants/new" class="btn btn-success add-rest">Add New Restaurant</a>
   </div>
   {% endif %}
-  
+
   {% for restaurant in restaurants %}
   {% if loop.index % 3 == 0 %}
   <div class="row">
   {% endif %}
     <div class="col-md-4">
-        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" alt="restaurant image" class="col-xs-12"></a>
-        <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{restaurant.name}}</h4></a>
+        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" alt="restaurant image" class="col-xs-12 rest-img"></a>
+        <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{ restaurant.name }}</h4></a>
         <h5 class="col-xs-12">{{ restaurant.location }}</h5>
-          <div class="starsDiv col-xs-12" id="{{restaurant.id}}review">
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-            <p id="starRating" class="starRating">
-              {{ restaurant.avg_review }}
-            </p>
-          </div>
-        <p class="col-xs-12 text-justify">
-          {{ restaurant.description }}
-        </p>
+        <div class="starsDiv col-xs-12" id="{{restaurant.id}}review">
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          <p id="starRating" class="starRating">{{ restaurant.avg_review }}</p>
+        </div>
+        <p class="col-xs-12 text-justify rest-descript">{{ restaurant.description }}</p>
         <h6 class="col-xs-12"><strong>Cuisine Type: {{ restaurant.type }}</strong></h6>
     </div>
     {% if loop.index % 3 == 0 %}

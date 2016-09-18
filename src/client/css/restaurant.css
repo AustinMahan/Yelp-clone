@@ -1,9 +1,11 @@
-.restaurantContainer{
-  padding: 20px;
+.rest-main-img {
+  width: 550px;
+  height: 340px;
 }
-.reviews-well{
-  overflow-y: scroll;
-  height: 550px;
+
+.reviews-well {
+  overflow: scroll;
+  height: 540px;
   background-color: white;
 }
 
@@ -16,23 +18,15 @@
   margin: 10px;
 }
 
-.review-border{
-  border: 1px solid #101010;
-  border-radius: 8px;
-  padding: 10px;
+.add-new-rev:hover {
+  background: #fff;
+  border-color: #404040;
 }
 
-.inside{
-  margin-bottom: 10px;
-  background: #f2f2f2;
+.active {
+  background: #5BC0DE !important;
 }
 
-.review-text{
-  padding: 0px 8px 0px 16px;
-  margin-bottom: 4px;
-}
-
-.test{
-  max-width: 650px;
-  font-size: 20px;
+.new-rest-form {
+  margin: 40px 0;
 }

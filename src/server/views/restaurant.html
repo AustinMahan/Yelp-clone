@@ -1,9 +1,10 @@
 {% extends "_base.html" %}
+
 {% block title %}
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="/css/restaurant.css" title=""e="restaurant">
+<link rel="stylesheet" href="/css/restaurant.css" title=""e="restaurant">
 {% endblock %}
 
 {% block content %}
@@ -11,73 +12,61 @@
 <div class="container single-rest">
   <div class="row">
     <div class="col-md-6">
-        <h1>{{restraurant.name}}</h1>
-        <img src="{{restraurant.url}}" alt="restaurant image" width="500"/>
-          <h1>{{restraurant.location}}</h1>
-        <div class="number0" id="{{results[0].restaurant_id}}restaurant">
-          <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
-          <span id="starRating" style="display:none;">{{restraurant.avg_review}}</span>
-        </div>
-
-        <p>
-          {{restraurant.description}}
-        </p>
-
-        <h4><strong>Cuisine Type:</strong></h4>
-        <h5>
-          {{restraurant.type}}
-        </h5>
+      <h2 class="col-md-12">{{ restraurant.name }}</h2>
+      <img src="{{ restraurant.url }}" class="col-md-12 rest-main-img" alt="restaurant image">
+      <h4 class="col-md-12">{{ restraurant.location }}</h4>
+      <div class="number0 col-md-12" id="{{ results[0].restaurant_id }}restaurant">
+        <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
+        <span id="starRating" style="display:none;">{{ restraurant.avg_review }}</span>
+      </div>
+      <p class="col-md-12">{{ restraurant.description }}</p>
+      <h5 class="col-md-12">Cuisine Type: {{ restraurant.type }}</h5>
     </div>
-    <div class="col-md-6">
-      <div class='row test'>
-        <h2 class='text-left'><strong>{{ reviews | length }} Reviews</strong></h2>
 
+    <div class="col-md-6" style="margin-top: 8px">
+      <div class="row">
+        <h3 class="col-xs-6">{{ reviews | length }} Reviews</h3>
+        <br>
         {% if reviewWritten != true or reviewWritten != 'undefined' %}
-        <div class="text-right">
-          <a href="/restaurants/{{restraurant.id}}/reviews/new" class="btn btn-primary add-rest"><span class='glyphicon glyphicon-plus'></span> Add New Review</a>
-        </div>
+        <a href="/restaurants/{{restraurant.id}}/reviews/new" class="btn btn-default col-xs-4 col-xs-offset-2 add-new-rev"><span class='glyphicon glyphicon-plus'></span> Add New Review</a>
         {% endif %}
       </div>
-      <div class="well reviews-well review-border">
-        {% for result in reviews %}
-        <div class='review-border inside'>
-          <div class="row">
-            <p class='review-text'>
-              {{result.review}}
-            </p>
-          </div>
-          <div class="row">
+      <div class="row">
+        <div class="reviews-well review-border">
+          {% for result in reviews %}
           <div class="col-md-4">
-            <h5>
-              <span style="display:none;" class="rating">{{result.rating}}</span>
-              <div class="number{{loop.index}}" id="{{result.user_id}}review">
-                <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
-              </div>
+            <h5>{{ result.first_name }}, {{ result.last_name | truncate(1, true, '.') }}</h5>
+          </div>
+          <h5 class="col-md-4">
+            <span style="display:none;" class="rating">{{ result.rating }}</span>
+            <div class="number{{loop.index}}" id="{{result.user_id}}review">
+              <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
+            </div>
           </h5>
+          <div class="col-md-12">
+            <p class="text-justify">{{ result.review }}</p>
+            <div class="row">
+              <h6 class="col-md-6">Posted: {{ result.created_at | date("dddd, MMMM Do YYYY")}}</h6>
+              <div class="col-md-6" style="margin-top: 7px">
+                {% if user.admin %}
+                  {% include "user_review_button.html" %}
+                {% elif result.user_id === user.id %}
+                  {% include "user_review_button.html" %}
+                {% endif %}
+              </div>
+            </div>
+            <hr>
           </div>
-          <div class="col-md-4 col-md-4-offset-4">
-            <h5>{{result.created_at}}</h5>
-          </div>
-          <div class="col-md-4 col-md-4-offset-8">
-            <h5>{{result.first_name}}, {{result.last_name | truncate(1, true, '.')}}</h5>
-          </div>
+          {% endfor %}
         </div>
-
-        {% if user.admin %}
-          {% include "user_review_button.html" %}
-        {% elif result.user_id === user.id %}
-          {% include "user_review_button.html" %}
-        {% endif %}
-      </div>
-      {% endfor %}
       </div>
     </div>
   </div>
@@ -85,5 +74,5 @@
 
 {% endblock %}
 {% block scripts %}
-  <script type="text/javascript" src="/js/restaurants.js"></script>
+<script type="text/javascript" src="/js/restaurants.js"></script>
 {% endblock %}
