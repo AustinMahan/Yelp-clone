@@ -6,7 +6,7 @@
 
   <div class="container-fluid">
     <img class="main-img" src="./media/main-img.jpeg">
-    <h1 class="welcome-tag">Welcome to gRestaurants</h1>
+    <h1 class="welcome-tag">Welcome To gRestaurants</h1>
     <div class="row">
       <h2 class="text-center">Featured Restaurants</h2>
     </div>
@@ -14,7 +14,7 @@
     <div class="row container-fluid">
       {% for restaurant in restaurants %}
       <figure class="figure col-md-4">
-        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" class="col-xs-12"></a>
+        <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" class="col-xs-12 feat-img"></a>
         <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{ restaurant.name }}</a></h4>
         <h5 class="col-xs-12">{{ restaurant.location }}</h5>
         <figcaption class="col-xs-12 figure-caption text-justify">{{ restaurant.description }}</figcaption>

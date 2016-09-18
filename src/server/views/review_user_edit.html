@@ -3,49 +3,75 @@
 {% endblock %}
 
 {% block css %}
-  <link rel="stylesheet" href="/css/restaurant.css">
-  <link rel="stylesheet" href="/css/edit.css">
+<link rel="stylesheet" href="/css/restaurant.css">
+<link rel="stylesheet" href="/css/edit.css">
 {% endblock %}
 
 {% block content %}
 
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-8 col-md-offset-2">
 
-      <h2>Editing Review for {{results.name}}</h2>
+    <h3>Edit your review for {{ results.name }}</h3>
 
-      <h4>Posting as: {{results.first_name}} {{results.first_name}}</h4>
+    <h5><small>Posting as: {{ results.first_name }} {{ results.first_name }}</small></h5>
 
-    <form method="POST" action='/restaurants/{{restaurantID}}/review/{{reviewID}}/edit/submit'>
-    <div class='rating_radio' data-id='{{results.rating}}'>
+    <div class="new-rest-form">
+      <h6>How would your rate this restaurant?</h6>
+      <form method="POST" action='/restaurants/{{ restaurantID }}/review/{{ reviewID }}/edit/submit'>
+      <div class='rating_radio' data-id='{{ results.rating }}'>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="rating" id="inlineRadio1" value="1">
+             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="rating" id="inlineRadio2" value="2">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="rating" id="inlineRadio3" value="3">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="rating" id="inlineRadio4" value="4">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </label>
+          <label class="btn btn-default btn-xs active">
+            <input type="radio" name="rating" id="inlineRadio5" value="5">
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+          </label>
+        </div>
+      </div>
 
-      <label class="radio-inline">
-        <input type="radio" name="rating" id="inlineRadio1" value="1"> 1
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="rating" id="inlineRadio2" value="2"> 2
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="rating" id="inlineRadio3" value="3"> 3
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="rating" id="inlineRadio4" value="4"> 4
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="rating" id="inlineRadio5" value="5"> 5
-      </label>
-  </div>
+      <br>
 
-          <br>
-
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea class="form-control" rows="3" name="review" id="book-update-description">{{results.review}}</textarea>
+      <div class="form-group">
+        <label for="description"><h6>Please describe your expericen at {{ results.name }}</h6></label>
+        <textarea class="form-control test" rows="12" name="review" id="book-update-description">{{ results.review }}</textarea>
+      </div>
+      <br>
+      <div class="row">
+        <div class="text-left col-md-4">
+          <button type="edit_review" class="btn btn-success review_edit_submit">Edit Review</button>
+        </div>
+        <div class="text-right col-md-4 col-md-offset-4">
+          <a href="/restaurants/{{ restaurantID }}"type="submit" name="button" class="btn btn-danger"><span class='glyphicon glyphicon-remove'></span> Cancel</a>
+        </div>
+      </div>
+    </form>
     </div>
-    <br>
-    <button type="edit_review" class="btn btn-lrg review_edit_submit">Edit Review</button>
-  </form>
   <br>
 
 

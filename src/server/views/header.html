@@ -14,16 +14,16 @@
 
       <!-- Collect the nav links and forms for toggling -->
       <div class="collapse navbar-collapse" id="navbar-collapse-1">
-        <form class="navbar-form navbar-left" action="/restaurants/search" method="post">
+        <form class="navbar-form navbar-left search" action="/restaurants/search" method="post">
           <div class="form-group">
-            <input type="text" class="form-control search-form" placeholder="ex. qDoba" name='search'>
+            <input type="text" class="form-control search-form" placeholder="Example: qDoba" name='search'>
           </div>
           <button type="submit" class="btn btn-warning search-btn">Search</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/restaurants"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-            <li><a href="/signup"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
           {% if user.id === undefined %}
+            <li><a href="/signup"><span class="glyphicon glyphicon-pencil"></span> Sign Up</a></li>
             <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
           {% elif user.id %}
             <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

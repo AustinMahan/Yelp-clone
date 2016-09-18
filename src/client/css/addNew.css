@@ -1,27 +1,27 @@
-.addForm{
+.addForm {
   margin-top: 75px;
 }
 
-textarea{
+textarea {
   margin-top: 20px;
   width: 100%;
 }
 
-.login{
+.login {
   text-align: center;
 }
 
-#addEmpl{
+#addEmpl {
   float: right;
   padding: 15px;
   font-size: 14px;
   color: blue;
 }
 
-#addEmpl:hover{
+#addEmpl:hover {
   cursor: pointer;
 }
 
-.oneEmp{
+.oneEmp {
   margin-top: 50px;
 }
