@@ -46,7 +46,7 @@ router.get('/page/:id', function (req, res, next) {
 
 router.get('/new', function (req, res, next) {
   const { renderObj } = req;
-  res.render('newRest', {});
+  res.render('newRest', renderObj);
 });
 
 router.get('/:id', function (req, res, next) {
