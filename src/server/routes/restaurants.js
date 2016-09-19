@@ -46,6 +46,7 @@ router.get('/page/:id', function (req, res, next) {
 
 router.get('/new', function (req, res, next) {
   const { renderObj } = req;
+  renderObj.title = `Add new restaurant`;
   res.render('newRest', renderObj);
 });
 
@@ -206,6 +207,7 @@ router.get('/:id/review/:revId/edit', function (req, res, next) {
     renderObj.results = results[0];
     renderObj.restaurantID = restaurantID;
     renderObj.reviewID = reviewID;
+    renderObj.title = `Edit Review for ${results[0].name}`;
     res.render('review_user_edit', renderObj);
   })
   .catch((err) => {
