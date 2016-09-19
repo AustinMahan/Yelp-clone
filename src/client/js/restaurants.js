@@ -3,6 +3,7 @@ console.log('restaurants.js sanity check');
 (function() {
   'use strict';
   const ratingsArray = $('.rating').splice(0, $('.rating').length)
+  console.log(ratingsArray);
   // console.log(ratingsArray);
   ratingsArray.forEach(function(rating, i) {
     console.log(rating.textContent);

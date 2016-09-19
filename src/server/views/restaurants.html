@@ -24,13 +24,14 @@
         <a href="/restaurants/{{ restaurant.id }}"><img src="{{ restaurant.url }}" alt="restaurant image" class="col-xs-12 rest-img"></a>
         <h4 class="col-xs-12"><a href="/restaurants/{{ restaurant.id }}">{{ restaurant.name }}</h4></a>
         <h5 class="col-xs-12">{{ restaurant.location }}</h5>
-        <div class="starsDiv col-xs-12" id="{{restaurant.id}}review">
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          <p id="starRating" class="starRating">{{ restaurant.avg_review }}</p>
+        <span style="display:none;" class="rating">{{ restaurant.avg_review }}</span>
+        <div class="number{{loop.index}} col-md-12" id="{{ results[0].restaurant_id }}restaurant">
+          <span class="glyphicon glyphicon-star-empty num1" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num2" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num3" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num4" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-star-empty num5" aria-hidden="true"></span>
+          <span id="starRating{{loop.index}}" style="display:none;">{{ restaurant.avg_review }}</span>
         </div>
         <p class="col-xs-12 text-justify rest-descript">{{ restaurant.description }}</p>
         <h6 class="col-xs-12"><strong>Cuisine Type: {{ restaurant.type }}</strong></h6>

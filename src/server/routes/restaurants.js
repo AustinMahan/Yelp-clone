@@ -26,7 +26,7 @@ router.get('/page/:id', function (req, res, next) {
       pageArr.push(i + 1);
     }
 
-    renderObj.title = `gRestaurants Page: ${pageNum +1}`;
+    renderObj.title = `gRestaurants Page: ${pageNum + 1}`;
     renderObj.nextPage = pageNum + 1;
     renderObj.prevPage = pageNum - 1;
     renderObj.allPages = pageArr;
@@ -46,7 +46,8 @@ router.get('/page/:id', function (req, res, next) {
 
 router.get('/new', function (req, res, next) {
   const { renderObj } = req;
-  res.render('newRest', {});
+  renderObj.title = `Add new restaurant`;
+  res.render('newRest', renderObj);
 });
 
 router.get('/:id', function (req, res, next) {
@@ -206,6 +207,7 @@ router.get('/:id/review/:revId/edit', function (req, res, next) {
     renderObj.results = results[0];
     renderObj.restaurantID = restaurantID;
     renderObj.reviewID = reviewID;
+    renderObj.title = `Edit Review for ${results[0].name}`;
     res.render('review_user_edit', renderObj);
   })
   .catch((err) => {
@@ -383,14 +385,20 @@ router.post('/new', function (req, res, next) {
 });
 
 router.post('/search', function(req, res, next) {
+  var { renderObj } = req;
   var searchName = req.body.search.toLowerCase();
-  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `${searchName}`)).then(function(data) {
-    if (data.length > 0) {
-      res.redirect(`/restaurants/${data[0].id}`);
-    } else {
-      res.redirect('/restaurants');
-    }
-  });
+  if (searchName.length == 0) {
+    res.redirect('/restaurants');
+  }else {
+    knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `%${searchName}%`)).limit(9).then(function(data) {
+      if (data.length > 0) {
+        renderObj.restaurants = data
+        res.render(`restaurants`, renderObj);
+      } else {
+        res.redirect('/restaurants');
+      }
+    });
+  }
 });
 
 module.exports = router;
