@@ -5,7 +5,7 @@
 
 {% block content %}
 
-  <div class="container col-md-4  addForm col-md-offset-4">
+  <div class="container col-md-4  addForm col-md-offset-4" id="tooSmall">
     <form class="login" action="/signup" method="post">
       <label for="first_name" class="text-center">First Name</label>
       <input required type="text" name="first_name" class="form-control"><br>
@@ -18,13 +18,14 @@
 
       <label for="password" class="">Password</label>
       <input required type="password" name="password" class="form-control">
+      <br>
 
       {% if err %}
       <div class="logErr">
         username is already in use.
       </div>
       {% endif %}
-      <input type="submit" class="form-control">
+      <input type="submit" class="btn btn-success form-control">
     </form>
   </div>
 

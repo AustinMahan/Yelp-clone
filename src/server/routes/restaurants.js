@@ -26,7 +26,7 @@ router.get('/page/:id', function (req, res, next) {
       pageArr.push(i + 1);
     }
 
-    renderObj.title = `gRestaurants Page: ${pageNum +1}`;
+    renderObj.title = `gRestaurants Page: ${pageNum + 1}`;
     renderObj.nextPage = pageNum + 1;
     renderObj.prevPage = pageNum - 1;
     renderObj.allPages = pageArr;
@@ -385,14 +385,20 @@ router.post('/new', function (req, res, next) {
 });
 
 router.post('/search', function(req, res, next) {
+  var { renderObj } = req;
   var searchName = req.body.search.toLowerCase();
-  knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `${searchName}`)).then(function(data) {
-    if (data.length > 0) {
-      res.redirect(`/restaurants/${data[0].id}`);
-    } else {
-      res.redirect('/restaurants');
-    }
-  });
+  if (searchName.length == 0) {
+    res.redirect('/restaurants');
+  }else {
+    knex('restaurants').where(knex.raw('LOWER("name") LIKE ?', `%${searchName}%`)).limit(9).then(function(data) {
+      if (data.length > 0) {
+        renderObj.restaurants = data
+        res.render(`restaurants`, renderObj);
+      } else {
+        res.redirect('/restaurants');
+      }
+    });
+  }
 });
 
 module.exports = router;
