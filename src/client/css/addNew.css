@@ -1,21 +1,5 @@
-.addForm {
-  margin-top: 75px;
-}
-
-textarea {
-  margin-top: 20px;
-  width: 100%;
-}
-
 .login {
   text-align: center;
-}
-
-#addEmpl {
-  float: right;
-  padding: 15px;
-  font-size: 14px;
-  color: blue;
 }
 
 #addEmpl:hover {
@@ -24,4 +8,30 @@ textarea {
 
 .oneEmp {
   margin-top: 50px;
+}
+
+.signUp,
+.signIn,
+.signUp:focus,
+.signIn:focus {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.signUp-form {
+  margin-top: 140px;
+  margin-bottom: 145px;
+}
+
+.signIn-form {
+  margin-top: 140px;
+  margin-bottom: 250px;
+}
+
+.signUp,
+.signIn {
+  margin: 20px 0;
 }

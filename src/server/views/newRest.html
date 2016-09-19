@@ -2,78 +2,84 @@
 
 {% block title %}{% endblock %}
 
-{% block css %}<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="/css/addNew.css" media="screen" title="no title">
+{% endblock %}
 
 {% block content %}
-<div class="container-fluid">
-  <form class="newRest col-md-8 col-md-offset-2" action="/restaurants/new" method="post">
-    
-    <div class="row">
-      <div class="input-group col-md-6">
-        <label for="name">Name of Restaurant</label>
-        <input required type="text" name="name" class="form-control">
+
+<div class="container">
+  <div class="row col-md-10 col-md-offset-1">
+    <form class="" action="/restaurants/new" method="post">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="name">Name of Restaurant</label>
+          <input required type="text" name="name" class="form-control">
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="type">Type</label>
+          <select class="form-control" name="type">
+            <option value="mexican">Mexican</option>
+            <option value="american">American</option>
+            <option value="italian">Italian</option>
+            <option value="chinese">Chinese</option>
+          </select>
+        </div>
       </div>
 
-      <div class="input-group col-md-6">
-        <label for="type">Type</label>
-        <select class="form-control" name="type">
-          <option value="mexican">Mexican</option>
-          <option value="american">American</option>
-          <option value="italian">Italian</option>
-          <option value="chinese">Chinese</option>
-        </select>
-      </div>
-    </div>
-
-    <br>
-    <div class="row">
-      <div class="input-group">
+      <div class="form-group">
         <label for="url">Image Url</label>
         <input required type="text" name="url" class="form-control">
       </div>
-    </div>
 
-    <div class="row">
-      <div class="input-group">
-        <label for="streetAddress">Street Address</label>
-        <input required type="text" name="streetAddress" class="form-control">
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="streetAddress">Street Address</label>
+          <input required type="text" name="streetAddress" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="city">City</label>
+          <input required type="text" name="city" class="form-control">
+        </div>
+        <div class="form-group col-md-4">
+          <label for="state">State Abbreviation</label>
+          <input required type="text" name="state" class="form-control" maxlength="2" minlength='2'>
+        </div>
       </div>
-      <div class="input-group">
-        <label for="city">City</label>
-        <input required type="text" name="city" class="form-control">
-      </div>
-      <div class="input-group">
-        <label for="state">State Abbreviation</label>
-        <input required type="text" name="state" class="form-control" maxlength="2" minlength='2'>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="input-group">
+      <div class="form-group">
         <label for="description">Description</label>
-        <textarea name="description" rows="8" cols="40" required></textarea>
+        <textarea name="description" class="form-control test" rows="12" required></textarea>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="input-group">
-        <label for="owner_first">Owner First Name</label>
-        <input required type="text" class="form-control" name="owner_first">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="owner_first">Owner First Name</label>
+          <input required type="text" class="form-control" name="owner_first">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="owner_last">Owner Last Name</label>
+          <input required type="text" class="form-control" name="owner_last">
+        </div>
       </div>
-      <div class="input-group">
-        <label for="owner_last">Owner Last Name</label>
-        <input required type="text" class="form-control" name="owner_last">
-      </div>
-    </div>
 
-    <p id="addEmpl">
-      Add Employee
-    </p>
-    <input type="submit" class="form-control">
-    <a href="/restaurants" class="btn btn-warning">Cancel</a>
-  </form>
+      <div class="row">
+        <button class="btn btn-default col-md-10 col-md-offset-1" id="addEmpl">Add Employee</button>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <button type="submit" class="btn btn-success col-md-4 col-md-offset-1">Save</button>
+        <a href="/restaurants" class="btn btn-danger col-md-4 col-md-offset-2">Cancel</a>
+      </div>
+    </form>
+  </div>
 </div>
 
 {% endblock %}
 
-{% block scripts %}<script type="text/javascript" src="/js/addRest.js"></script>{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="/js/addRest.js"></script>
+{% endblock %}
