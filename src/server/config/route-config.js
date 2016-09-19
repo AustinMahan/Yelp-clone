@@ -22,14 +22,8 @@
     app.use(function(req, res, next) {
       req.renderObj = {};
       if (req.session.user) {
-        knex('users').where('id', req.session.user.id).then((data) => {
-          if (data.length > 0) {
-            req.renderObj.user = data[0];
-          }else {
-            req.renderObj.user = 'null';
-          }
-          next();
-        });
+        req.renderObj.user = req.session.user;
+        next();
       } else {
         next()
       }
