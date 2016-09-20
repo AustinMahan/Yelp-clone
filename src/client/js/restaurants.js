@@ -6,7 +6,6 @@ console.log('restaurants.js sanity check');
   console.log(ratingsArray);
   // console.log(ratingsArray);
   ratingsArray.forEach(function(rating, i) {
-    console.log(rating.textContent);
     $(`.number${i + 1} .num${parseInt(rating.textContent)}`).toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star')
     $(`.number${i + 1} .num${parseInt(rating.textContent)}`).prevAll().toggleClass('glyphicon glyphicon-star-empty glyphicon glyphicon-star')
   })
