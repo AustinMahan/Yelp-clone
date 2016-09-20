@@ -6,5 +6,5 @@
 1. Adam Franzen
 1. Kristjan Gannon
 
-### To visit go to https://peaceful-wave-34154.herokuapp.com/
-### Admin Rights Username: 'Amahan' Password: 'password'
+To visit go to https://peaceful-wave-34154.herokuapp.com/
+Admin Rights Username: 'Amahan' Password: 'password'
